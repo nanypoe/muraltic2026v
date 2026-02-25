@@ -1,0 +1,236 @@
+/* Variables de Identidad Institucional */
+:root {
+    --inatec-blue: #1a4e8a;
+    --inatec-cyan: #00a1df;
+    --inatec-green: #8cc63f;
+    --inatec-magenta: #e6007e;
+    --bg-light: #f8fafc;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animación de entrada suave */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* HEADER: Recuperado tamaño original 80px */
+.hero {
+    background: linear-gradient(135deg, var(--inatec-blue), var(--inatec-cyan));
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+    border-bottom: 4px solid var(--inatec-green);
+    margin-bottom: 2rem;
+}
+
+.hero img {
+    width: 80px; 
+    height: 80px;
+    background: var(--white);
+    padding: 5px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+/* CARDS: Estilo original con animaciones */
+.card-grid {
+    display: grid;
+    gap: 1.2rem; /* Un poco más de espacio entre ellas */
+}
+
+.paso-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Efecto hover/click corregido */
+@media (hover: hover) {
+    .paso-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--inatec-cyan);
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+    }
+    /* Brillo sutil al pasar el mouse */
+    .paso-card:hover::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(225deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+        pointer-events: none;
+    }
+}
+
+.paso-card:active {
+    transform: scale(0.94);
+    background-color: #f8fafc;
+}
+
+/* Indicadores de color para el Buscador (Sutiles) */
+.card-centro { border-top: 5px solid var(--inatec-blue) !important; }
+.card-ingreso { border-top: 5px solid var(--inatec-green) !important; }
+.card-turno { border-top: 5px solid var(--inatec-cyan) !important; }
+.card-carrera { border-top: 5px solid var(--inatec-magenta) !important; }
+
+.paso-card i, .paso-card .icon-box {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.paso-card.disabled {
+    opacity: 0.6;
+    filter: grayscale(1);
+    pointer-events: none;
+}
+
+/* BOTONES */
+.btn-primary {
+    background-color: var(--inatec-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-feedback {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--inatec-magenta);
+    color: var(--white);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(230, 0, 126, 0.4);
+    z-index: 1000;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+/* MODAL MODERNO */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.modal-user-box {
+    background: #f1f5f9;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    border: 2px dashed var(--inatec-cyan);
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--inatec-blue);
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .container { max-width: 900px; }
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+
+/* Contenedor posicionado en la esquina */
+.feedback-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000; /* Asegurar que esté por encima de todo */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* El mensaje (bocadillo) */
+.feedback-badge {
+    background: var(--inatec-blue);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-size: 0.85rem;
+    margin-bottom: 75px; /* Espacio real entre el mensaje y el botón */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 180px; /* Ancho fijo para que no se deforme */
+    line-height: 1.3;
+    text-align: center;
+    position: relative;
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Triangulito apuntando hacia abajo */
+.feedback-badge::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--inatec-blue);
+}
+
+/* Animación de entrada carismática */
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3) translateY(20px); }
+    70% { transform: scale(1.1) translateY(0); }
+    100% { opacity: 1; transform: scale(1); }
+}
