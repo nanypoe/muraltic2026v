@@ -20,14 +20,14 @@ const CONTENIDOS = {
         link: "tutorial.html?id=buscador-app",
       },
       {
+        nombre: "¿Cómo accedo al CAMPUS Virtual?",
+        icono: "🚪",
+        link: "tutorial.html?id=acceso-cursos",
+      },
+      {
         nombre: "¿Cómo realizo los módulos transversales?",
         icono: "🎓",
         link: "tutorial.html?id=metodologia",
-      },
-      {
-        nombre: "Tengo un problema/error",
-        icono: "⚠️",
-        link: "tutorial.html?id=errores",
       },
     ],
   },
@@ -44,56 +44,24 @@ const CONTENIDOS = {
     youtubeId: "vBEn1K8u_E8", // Ejemplo
     cuerpo: `<p>Tabla de fechas aquí...</p>`,
   },
-  errores: {
-    titulo: "Errores que podrían aparecer y cómo solucionarlos",
+  "acceso-cursos": {
+    titulo:
+      "¿Cómo accedo al CAMPUS Virtual para hacer los Módulos Transversales?",
+    esTutorial: true,
+    youtubeId: "e2Lx_StxbcY",
     descripcion:
-      "Si te encuentras con algún problema al acceder o completar los módulos, revisa esta sección para encontrar la solución. Haz clic en el error que estás experimentando para ver los pasos detallados para resolverlo.",
-    esMenu: true,
-    opciones: [
-      {
-        nombre: "Acceso inválido. Por favor intentelo otra vez.",
-        descripcion:
-          "Este error suele aparecer cuando el usuario o la contraseña son incorrectos.",
-        icono: "🚫",
-        link: "tutorial.html?id=error-login",
-      },
-      {
-        nombre: "Editar perfil",
-        descripcion:
-          "Aparece un mensaje que dice Editar perfil y no me deja avanzar.",
-        icono: "📝",
-        link: "tutorial.html?id=error-perfil",
-      },
-    ],
-  },
-  "error-login": {
-    titulo: "Acceso inválido. Por favor intentelo otra vez.",
-    descripcion:
-      "Este es un error común que suele ocurrir por varias razones. A continuación, te explicamos las causas más frecuentes y cómo solucionarlo según el dispositivo que estés usando.",
-    esErrorDetalle: true,
-    videoCel: "Ef3-iOLA1KY", // Ejemplo
-    videoPC: "Ef3-iOLA1KY", // Ejemplo
+      "Para acceder al CAMPUS para poder iniciar con los Módulos Transversales mira el siguiente video:",
+    cuerpo: `<p>En caso de que no tengas datos, podés seguir las instrucciones detalladas y con imágenes a continuación.</p>`,
     pasos: [
-      "1. En el cuadro de texto que dice 'Nombre de usuario', asegurate de escribir tu usuario en <b>minúsculas</b> y con un <b>punto</b> entre tu nombre y apellido (ejemplo: juan.perez). O escríbelo exactamente como aparece en el buscador de credenciales y en listado de credenciales que envió tu docente a los grupos de WhatsApp y Telegram.",
-      "2. En el cuadro de texto que dice 'Contraseña', recordá que la contraseña por defecto es <b>Inatec26*</b>. Es importante que la primera letra sea mayúscula (I mayúscula) y que al final lleve un asterisco (*).",
-      "3. Asegurate de no dejar espacios al final del texto en ambos cuadros (usuario y contraseña), ya que esto puede causar el error de acceso. Si estás copiando y pegando la información, es recomendable escribirla manualmente para evitar espacios adicionales.",
-    ],
-  },
-  "error-perfil": {
-    titulo: "Editar perfil",
-    descripcion:
-      "Aparece un mensaje que dice Editar perfil y no me deja avanzar. Este error suele ocurrir cuando el sistema detecta que tu perfil no está completo. Para solucionarlo, sigue estos pasos:",
-    esErrorDetalle: true,
-    videoCel: "Ef3-iOLA1KY", // Ejemplo
-    videoPC: "Ef3-iOLA1KY", // Ejemplo
-    pasos: [
-      "<img src='assets/img/error-perfil-paso1.png' class='img-tutorial' alt='Ejemplo usuario'>",
-      "1. Si te fijas aparece una casilla que dice 'Nombre' con un signo de exclamación rojo a la par ❗. Pero ahí tu nombre ya aparece completo, ¿verdad? Entonces, lo que debes hacer es lo siguiente.",      
-      "2. Desliza la pantalla hacia abajo (si estás en el celular) o baja con el scroll (si estás en la computadora) hasta que encuentres los campos que dicen 'Edad', 'Teléfono' y 'Sexo'.",
-      "3. Completa esos campos con tu información personal. Es importante que llenes esos campos para que el sistema te permita avanzar.",
-      "4. Una vez que hayas llenado esos campos, desliza o baja hasta el final de la página y busca un botón rojo que dice 'Actualizar información de perfil'. Haz clic en ese botón para guardar los cambios.",
-      "5. Después de actualizar tu perfil, vuelve a intentar acceder a mis cursos tocando el botón de menú (el botón de las 3 rayitas que está en la parte superior derecha) y deberías poder ingresar sin problemas. Si el error persiste, asegúrate de haber completado todos los campos correctamente y de haber guardado los cambios.",
-      "6. Si después de seguir estos pasos el problema continúa, te recomendamos contactar a tu Docente TIC.",
+      "Primero, abrí el navegador de tu preferencia en tu dispositivo móvil. Pero te recomendamos usar Mozilla Firefox, porque abre directame los documentos PDF que estudiarás",
+      "Ingresa en la barra de búsqueda o dale clic a la siguiente dirección: <a href='https://campus.inatec.edu.ni/' target='_blank'>https://campus.inatec.edu.ni/</a>",
+      "Ubica el ícono del candado en la esquina superior derecha de la página y haz clic en él para acceder a la sección de inicio de sesión.",
+      "Ingresá tu nombre de usuario y contraseña. Si no los conocés, podés encontrarlos en el <a href='https://nanypoe.github.io/muraltic2026v/tutorial.html?id=buscador-app' target=' target='_blank'>buscador de credenciales</a> seleccionando tu centro, año y carrera.",
+      "Una vez que hayas completado tus datos, presioná el botón 'Acceder' para ingresar a la plataforma.",
+      "Si es la primera vez que ingresás, el sistema podría pedirte que actualices tus datos personales, como tu edad y número de teléfono, en la sección de 'Editar perfil'.",
+      "Para ver tus clases, hacé clic en el menú desplegable (las tres líneas) en la esquina superior derecha y seleccioná la opción 'Mis cursos'.",
+      "Buscá el curso correspondiente a los Módulos Transversales 26 y hacé clic en él para acceder al contenido.",
+      "Dentro del curso, verás las pestañas de Introducción y los diferentes Módulos. Seleccioná el módulo actual para comenzar a revisar el material y realizar las actividades programadas.",
     ],
   },
 };
@@ -144,32 +112,6 @@ function renderizarContenido(data) {
     script.src = "js/buscador.js";
     script.onload = () => iniciarBuscador();
     document.body.appendChild(script);
-  } else if (data.esErrorDetalle) {
-    // Lógica de Diccionario de Errores con Selector de Dispositivo
-    areaGuia.innerHTML = `
-            <div class="dispositivo-selector" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:1.5rem;">
-                <button class="btn-primary" onclick="cambiarVideoError('${data.videoCel}', 'pasos-cel')">📱 Móvil</button>
-                <button class="btn-primary" style="background:var(--inatec-cyan)" onclick="cambiarVideoError('${data.videoPC}', 'pasos-pc')">💻 Computadora</button>
-            </div>
-            <div id="instrucciones-error">
-                <p><i>Presiona en <b>Móvil</b> para ver el tutorial en video de cómo solucionar este error si estás accediendo desde tu celular. O presiona en <b>Computadora</b> si estás accediendo desde una computadora. Si no tienes suficientes datos o no te carga, podés seguir los pasos acontinuación:</i></p>
-                <ul style="list-style:none; text-align:left; margin-top:1rem; padding:0;">
-    ${data.pasos
-      .map((p) => {
-        // Si el paso empieza con "<img", lo imprimimos sin el estilo de lista
-        if (p.startsWith("<img")) {
-          return `<div style="width:100%">${p}</div>`;
-        }
-        // Si es texto normal, lo ponemos con su bullet y margen
-        return `<li style="margin-bottom:15px; padding-left:25px; position:relative;">
-                    <span style="position:absolute; left:0; color:var(--inatec-blue)">•</span>
-                    ${p}
-                </li>`;
-      })
-      .join("")}
-</ul>
-            </div>
-        `;
   } else if (data.esMenu) {
     let menuHTML = '<div class="card-grid" style="margin-top:1rem;">';
     data.opciones.forEach((opt) => {
@@ -181,10 +123,17 @@ function renderizarContenido(data) {
     });
     menuHTML += "</div>";
     areaGuia.innerHTML = menuHTML;
+  } else if (data.esTutorial) {
+    areaGuia.innerHTML = `<div class="video-container">
+        <iframe id="player-youtube" src="https://www.youtube.com/embed/${data.youtubeId}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="guia-texto">
+        ${data.cuerpo}
+        ${data.pasos ? "<h3>Pasos a seguir:</h3><ol>" + data.pasos.map((p) => `<li>${p}</li>`).join("") + "</ol>" : ""}
+    </div>`;
   }
 }
 
-// Función para cambiar el video dinámicamente
 function cambiarVideoError(youtubeId, tipo) {
   const areaVideo = document.getElementById("area-video");
   const player = document.getElementById("player-youtube");
@@ -192,6 +141,5 @@ function cambiarVideoError(youtubeId, tipo) {
   player.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
   areaVideo.style.display = "block";
 
-  // Scroll suave hasta el video
   areaVideo.scrollIntoView({ behavior: "smooth" });
 }
