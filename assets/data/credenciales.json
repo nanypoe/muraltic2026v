@@ -1,0 +1,43 @@
+{
+    "credenciales": {
+        "titulo": "Credenciales de acceso al Campus Virtual",
+        "descripcion_corta": "En esta sección encontrarás información sobre cómo acceder al Campus Virtual de INATEC, incluyendo los pasos necesarios para obtener tus credenciales de acceso y cómo utilizarlas para ingresar.",
+        "mensaje_estatico": "Busca tus credenciales para acceder al Campus Virtual",
+        "info_pantalla": "Sigue los siguientes pasos para encontrar tu nombre de usuario",
+        "pantallas": [
+            {
+                "pantalla": 1,
+                "mensaje": "Seleccioná el turno en el que asistís a clases: ",
+                "opciones": []
+            },
+            {
+                "pantalla": 2,
+                "mensaje": "Seleccioná tu carrera y grupo: ",
+                "opciones": []
+            },
+            {
+                "pantalla": 3,
+                "mensaje": "Buscá tu nombre y dale click en 'Ver': ",
+                "lista": [],
+                "btn_ver": "Ver"
+            },
+            {
+                "pantalla": 4,
+                "saludo": {
+                    "saludo": "¡Hola, ",
+                    "nombre": ""
+                },
+                "mensaje": "Tus credenciales de acceso al Campus Virtual son las siguientes: ",
+                "usuario": {
+                    "titulo": "Usuario: ",
+                    "usuario": ""
+                },
+                "contrasena": {
+                    "titulo": "Contraseña: ",
+                    "contrasena": ""
+                },
+                "btn_ok": "Entendido"
+            }
+        ]
+    }
+}

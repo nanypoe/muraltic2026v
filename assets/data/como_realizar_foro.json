@@ -1,0 +1,46 @@
+{
+    "foro": {
+        "titulo": "Cómo realizar un foro",
+        "descripcion_corta": "Aprendé a realizar un foro de manera efectiva.",
+        "atencion": "Los foros dentro del aula están representados por este icono de diálogo naranja. Para acceder a ellos, simplemente hacé clic en el icono o título y se abrirá la pantalla, en la que deberás realizar los siguientes pasos: ",
+        "imagen_icono": "/assets/img/pasos_otros/foros/icono_foro.png",
+        "btn_cambiar": {
+            "opciones": [
+                {
+                    "titulo": "Ver en PC",
+                    "url_embed": ""
+                },
+                {
+                    "titulo": "Ver en móvil",
+                    "url_embed": ""
+                }
+            ]
+        },
+        "pasos": [
+            {
+                "paso": 1,
+                "titulo": "Lectura de la dirección o consigna del foro",
+                "descripcion": "Debajo del título de cada foro, aparece un texto que nos orienta sobre qué es lo que debemos de escribir o realizar en el foro. Se debe de leer atentamente. La siguiente imagen señala (lo iluminado en amarillo) la parte del texto que debemos leer en cada foro: ",
+                "imagen_debajo": "/assets/img/pasos_otros/foros/foro_estructura.png"
+            },
+            {
+                "paso": 2,
+                "titulo": "Añadir un nuevo tema de debate",
+                "descripcion": "Una vez leída la dirección y comprendido lo que vamos a hacer, buscaremos abajo un botón rojo que dice 'Añadir un nuevo tema de debate'. Le daremos click y se nos desplegará una nueva sección que contendrá una estructura que detallaremos después. La siguiente imagen es la del botón: ",
+                "imagen_debajo": "/assets/img/pasos_otros/foros/foro_paso2.png"
+            },
+            {
+                "paso": 3,
+                "titulo": "Reconocer las funciones de la sección de redacción del foro",
+                "descripcion": "Lo que veremos será un procesador de texto que se dividirá en varias secciones. Lo que normalmente nos interesa es escribir en la casilla de 'Asunto', donde ponemos el tema sobre lo que vamos hablar. Y luego en la casilla de 'Mensaje', donde escribiremos el mensaje que queramos compartir, bien sea un comentario, análisis o reflexión. Existen otras opciones como pegar enlaces, adjuntar archivos, imágenes, videos y sonidos. En la siguiente imagene están señalados: ",
+                "imagen_debajo": "/assets/img/pasos_otros/foros/foro_estructura2.png"
+            },
+            {
+                "paso": 4,
+                "titulo": "Enviar al foro",
+                "descripcion": "Una vez que tengamos todo listo en Asunto y Mensaje, y si la tarea lo requiere, que tengamos adjuntadas ya sean imágenes o archivos. Procederemos enviar toda la información al foro presionando el botón rojo 'Enviar al foro'",
+                "imagen_debajo": "/assets/img/pasos_otros/foros/boton_enviar.png"
+            }
+        ]
+    }
+}

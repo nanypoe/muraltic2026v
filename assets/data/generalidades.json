@@ -1,0 +1,84 @@
+{
+    "generalidades": {
+        "badge": "MURAL TIC VIRTUAL",
+        "titulo": "Módulos Transversales 2026",
+        "subtitulo": "Tu complemento estratégico para el mundo laboral",
+        "descripcion_corta": "Conocé qué son los módulos transversales, su propósito e importancia en tu Carrera Técnica.",
+        "descripcion_larga": "Los módulos transversales son cursos complementarios diseñados para brindarte competencias clave aplicables en cualquier entorno de trabajo.",
+        "beneficios_clave": [
+            {
+                "icono": "communication",
+                "titulo": "Comunicación Efectiva",
+                "descripcion": "Expresá tus ideas con claridad en entornos profesionales."
+            },
+            {
+                "icono": "groups",
+                "titulo": "Trabajo en Equipo",
+                "descripcion": "Colaborá de forma eficiente con proyectos multidisciplinarios."
+            },
+            {
+                "icono": "psychology",
+                "titulo": "Pensamiento Crítico",
+                "descripcion": "Resolvé problemas complejos con criterio propio."
+            },
+            {
+                "icono": "social_leaderboard",
+                "titulo": "Liderazgo Adaptativo",
+                "descripcion": "Guiá e inspirá a otros en entornos cambiantes."
+            },
+            {
+                "icono": "more",
+                "titulo": "Quiero saber más sobre ¿para qué me sirven los módulos transversales?",
+                "descripcion": "Hacé clic aquí para responder a tu pregunta y conocer cómo estos módulos fortalecen tu perfil profesional."
+            }
+        ],
+        "conexion_carrera": {
+            "titulo": "¿Por qué los llevo si estudio mi carrera?",
+            "texto": "Independientemente de si estudiás Computación, Administración, Contabilidad, Diseño Gráfico o Programación, estas competencias fortalecen tu perfil profesional para cualquier empleo futuro.",
+            "carreras_ejemplo": [
+                {
+                    "nombre": "Computación & Programación",
+                    "icono": "code"
+                },
+                {
+                    "nombre": "Administración & Contabilidad",
+                    "icono": "analytics"
+                },
+                {
+                    "nombre": "Diseño Gráfico",
+                    "icono": "palette"
+                },
+                {
+                    "nombre": "Banca y Finanzas",
+                    "icono": "account_balance"
+                },
+                {
+                    "nombre": "Zootecnia",
+                    "icono": "pets"
+                },
+                {
+                    "nombre": "Agronomía",
+                    "icono": "agriculture"
+                },
+                {
+                    "nombre": "Gestión de Recursos Humanos",
+                    "icono": "group"
+                },
+                {
+                    "nombre": "Y más...",
+                    "icono": "more"
+                }
+            ],
+            "explicacion_detallada": "Estos módulos transversales son esenciales para complementar tu formación técnica, asegurando que tengas habilidades transferibles y aplicables en cualquier carrera que elijas seguir. Te preparan para enfrentar desafíos profesionales con una base sólida en comunicación, liderazgo, trabajo en equipo y pensamiento crítico. Además, te permiten adaptarte a diferentes roles y responsabilidades, aumentando tu empleabilidad y capacidad de contribuir efectivamente en cualquier organización. Al finalizar estos módulos, no solo habrás adquirido conocimientos técnicos, sino también habilidades blandas que son altamente valoradas en el mercado laboral actual. Esto te posiciona como un profesional integral, capaz de liderar proyectos, colaborar con equipos diversos y tomar decisiones informadas en situaciones complejas."
+        },
+        "caracter_obligatorio": {
+            "titulo": "¿Qué pasa si no los realizo o hago las actividades?",
+            "texto": "Los módulos transversales son obligatorios para todos los estudiantes de INATEC. No completarlos puede afectar tu progreso académico y tu capacidad para graduarte. Es fundamental que participes activamente en estos módulos y completes todas las actividades asignadas para asegurar tu éxito académico y profesional.",
+            "respuesta_corta": "No completar los módulos transversales o reprobarlos hará que tengas que entrar en modalidad de Reparación, donde solo tenés una oportunidad para aprobar cada uno de ellos. Si no los apruebas, no podrás continuar con tu carrera y no podrás graduarte. Por eso es importante que los realices y apruebes."
+        },
+        "aprobacion": {
+            "titulo": "¿Qué necesito hacer para aprobarlos?",
+            "texto": "Cada módulo está dividido en varias unidades, cada unidad contiene actividades a realizar, entre ellas están los foros de participación y reflexión según el tema de la unidad, los cuestionarios de evaluación que deben de aprobarse con una nota mínima de 60. Cada foro y cuestionario debe de ser aprobado para que cada unidad del módulo sea aprobada. Una vez que todas las unidades del módulo estén aprobadas, el módulo será considerado aprobado y podrás continuar con tu carrera. Si hay algo pendiente, a pesar de que hayas aprobado otras unidades, no podrás aprobar el módulo y tendrás que entrar en modalidad de Reparación. Por eso es importante que realices todas las actividades y apruebes cada unidad del módulo."
+        }
+    }
+}

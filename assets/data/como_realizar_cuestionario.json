@@ -1,0 +1,84 @@
+{
+    "cuestionario":{
+        "titulo":"Cómo realizar un cuestionario",
+        "descripcion_corta":"Aprendé a realizar un cuestionario de manera efectiva.",
+        "atencion":"Los cuestionarios dentro del aula están representados por este icono rosado con un check. Para acceder a ellos, simplemente hacé clic en el icono o título y se abrirá la pantalla, en la que deberás realizar los siguientes pasos: ",
+        "imagen_icono":"/assets/img/pasos_otros/cuestionarios/icono_cuestionario.png",
+        "btn_cambiar": {
+            "opciones": [
+                {
+                    "titulo": "Ver en PC",
+                    "url_embed": ""
+                },
+                {
+                    "titulo": "Ver en móvil",
+                    "url_embed": ""
+                }
+            ]
+        },
+        "pasos": [
+            {
+                "paso": 1,
+                "titulo": "Verificar estado de cuestionario",
+                "imagen_debajo": "/assets/img/pasos_otros/cuestionarios/cuest-seccion-1.png",
+                "descripcion": "Debajo del título de cada cuestionario, aparecen dos pestañas no interactuables, normalmente en gris que dicen: 'Por hacer', eso significa que el cuestionario aún no ha sido realizado. Aunque también puede estar en verde y decir 'Realizado', lo que indica que el cuestionario ya fue completado. Y si está en rojo, significa que está reprobado."
+            },
+            {
+                "paso": 2,
+                "titulo": "Verificar intentos de cuestionario",
+                "descripcion":"Debemos bajar la pantalla completamente hasta que encontremos un botón rojo que dice 'Intento de cuestionario'. Debajo de ese botón habrá un texto que dice 'Intentos permitidos', la cantidad de intentos que aparece después serán las oportunidades que todavía tenemos para aprobar el cuestionario.",
+                "imagen_debajo":"/assets/img/pasos_otros/cuestionarios/cuest-seccion-2.png"
+            },
+            {
+                "paso": 3,
+                "titulo": "Verificar la fecha de cierre",
+                "descripcion":"Debajo del estado del cuestionario, hay una pequeña sección que dice 'Fecha de cierre'. Aquí podemos ver la fecha límite para el cuestionario. Si se nos pasó la fecha, aunque sea por un minuto, no podremos intentar el cuestionario. Para esto debemos de comunicarnos con nuestro Docente TIC, a ver si todavía somos capaces de realizar esta u otra actividad. Él valorará sino estamos a destiempo.",
+                "imagen_debajo":"/assets/img/pasos_otros/cuestionarios/cuest-seccion-3.png"
+            },
+            {
+                "paso": 4,
+                "titulo": "Dirección de la actividad",
+                "descripcion":"En medio de la sección del cuestionario observaremos un texto. Ahí está descrita la actividad a realizar, nos indica con cuánto aprobaremos y sobre qué tratará el cuestionario. Siempre debemos de leerla para estar claros de la actividad.",
+                "imagen_debajo":"/assets/img/pasos_otros/cuestionarios/cuest-seccion-4.png"
+            },
+            {
+                "paso": 5,
+                "titulo": "Clic en el botón rojo que dice 'Intento de cuestionario'",
+                "descripcion":"Una vez que hayamos leído la información, deberemos de clicar en el botón rojo que dice 'Intento de cuestionario'. Al hacerlo, automáticamente nos trasladará a la pantalla del cuestionario y un cronometro de 45 minutos empezará a contar. Ese es el tiempo en que tenemos para resolverlo",
+                "imagen_debajo":"/assets/img/pasos_otros/cuestionarios/cuest-seccion-5.png"
+            },
+            {
+                "paso": 6,
+                "titulo": "Tipos de preguntas y ejercicios en los cuestionarios",
+                "descripcion":"En los cuestionarios existen varios tipos de preguntas y maneras de resolverlos. Algunas son múltiples opciones, mientras que otras requieren escribir una respuesta corta. Vamos a desglosar los posibles tipos de cuestionarios con ejemplos.",
+                "tipos_cuestionarios": [
+                    {
+                        "tipo":"Selección múltiple cliqueable",
+                        "descripcion":"Para poder resolverlos debemos leer y analizar su contenido, nos pedirá elegir una única opción de las disponibles. Solamente les daremos un clic. Sus opciones, para las cuales solo debemos de escoger una, se caracterizan porque su elemento cliqueable es un radial, es decir, una circunferencia, como la que aparece en la imagen a continuación: ",
+                        "imagen_tipo":"/assets/img/pasos_otros/cuestionarios/cuest-tipo-1.png"
+                    },
+                    {
+                        "tipo":"Falso y verdadero",
+                        "descripcion":"Para poder resolverlos debemos leer y analizar su contenido, nos pedirá elegir una única opción de las disponibles. Solamente les daremos un clic. Es similar al anterior, solamente que tiene dos únicas opciones: falso y verdadero. La siguiente imagen es un ejemplo: ",
+                        "imagen_tipo":"/assets/img/pasos_otros/cuestionarios/cuest-tipo-2.png"
+                    },
+                    {
+                        "tipo":"Seleccionar varias respuestas",
+                        "descripcion":"Para poder resolverlos debemos leer y analizar su contenido, nos pedirá elegir más de una respuesta. Solamente les daremos clic a las respuestas que creamos correctas. Es similar a los dos anteriores, solamente que su elemento es un checkbox, es decir, un cuadrado. La siguiente imagen es un ejemplo: ",
+                        "imagen_tipo":"/assets/img/pasos_otros/cuestionarios/cuest-tipo-3.png"
+                    },
+                    {
+                        "tipo":"Selección con selector",
+                        "descripcion":"Aquí la cosa cambia porque ya no se presentan todas las opciones de respuestas a la vez, sino que hay un item conocido como Selector, al que daremos clic. Al hacerlo, se desplegará una lista de opciones para elegir. Elegiremos la única que creemos conveniente. La siguiente imagen es un ejemplo: ",
+                        "imagen_tipo":"/assets/img/pasos_otros/cuestionarios/cuest-tipo-4.png"
+                    },
+                    {
+                        "tipo":"Cliquear, arrastrar, juntar y soltar",
+                        "descripcion":"Aquí la cosa cambia porque es una especie del típico 'JUNTE' las palabras. Se nos presenta normalmente un párrafo al que le faltan palabras, pues en lugar de ellas hay unos recuadros que funcionan como espacios. Nos debemos fijar debajo del párrafo que hay palabras o frases sueltas dentro de recuadros. A estas las debemos de hacer clic, mantenerlo presionado, arrastrarlas hasta el posible espacio de respuesta, juntar y soltar. La siguiente imagen es un ejemplo: ",
+                        "imagen_tipo":"/assets/img/pasos_otros/cuestionarios/cuest-tipo-5.png"
+                    }
+                ]
+            }
+        ]
+    }
+}

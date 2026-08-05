@@ -1,0 +1,59 @@
+{
+    "acceso_campus": {
+        "titulo": "Acceso al Campus Virtual",
+        "subtitulo": "Pasos para acceder al Campus Virtual del INATEC",
+        "mensaje": "Para acceder al Campus e iniciar con los módulos transversales, podés ver el siguiente video: ",
+        "video": [
+            {
+                "titulo": "Ver para PC",
+                "descarga": "assets/video/transversales/acceso_campus_pc.mp4",
+                "youtube": ""
+            },
+            {
+                "titulo": "Ver para Móvil",
+                "descarga": "assets/video/transversales/acceso_campus_movil.mp4",
+                "youtube": ""
+            }
+        ],
+        "btn_cambiar": {
+            "opciones": {
+                "movil":"Ver para Móvil",
+                "pc":"Ver para PC"
+            }
+        },
+        "mensaje_sin_datos": "En caso de que no tengas conexiónn, podés continuar con el tutorial siguiendo los siguientes pasos: ",
+        "pasos": [
+            {
+                "paso": 1,
+                "titulo": "Ingresar a la página web del Campus Virtual del INATEC",
+                "explicacion": "Para acceder al Campus Virtual deberás seguir la siguiente dirección web: https://campus.tecnacional.edu.ni/login/index.php, escribirla en la barra de navegación de tu teléfono o computadora (Véase la imagen anterior); o bien escanear el código QR a continuación. Véase la siguiente imagen: ",
+                "imagen_debajo": "/assets/img/pasos_otros/acceso_campus/qr-login.png"
+            },
+            {
+                "paso": 2,
+                "titulo": "Buscar e ingresar las credenciales de acceso.",
+                "explicacion": "La primera imagen en este paso nos muestra una sección de login o inicio de sesión, donde deberás ingresar tus credenciales de acceso (usuario y contraseña) que te fueron proporcionadas por el INATEC. Una vez ingresadas, deberás hacer clic en el botón de 'Acceder'. Véase la siguiente imagen: ",
+                "imagen_debajo": "/assets/img/pasos_otros/acceso_campus/pantalla-credenciales.png"
+            },
+            {
+                "paso": 3,
+                "titulo": "¿Qué hacer si me aparece un mensaje de 'Acceso inválido. Por favor, inténtelo otra vez.' En rojo?",
+                "explicacion": "Este es un error que puede ocurrir si ingresaste mal tus credenciales, por lo que debés verificar bien en la lista que el Docente TIC les proporcionó en los grupos de Telegram y WhatsApp o a través de tu docente guía. O bien podrías contactar a tu docente guía a través tocando su foto de perfil debajo: ",
+                "docentes_tic": [
+                    {
+                        "nombre": "Prof. Renaldy Sánchez",
+                        "foto": "/assets/img/pasos_otros/acceso_campus/TIC_R.png",
+                        "contacto": "https://wa.me/57985106"
+                    },
+                    {
+                        "nombre": "Prof. Mitzy Aguilera",
+                        "foto": "/assets/img/pasos_otros/acceso_campus/TIC_M.png",
+                        "contacto": "https://wa.me/86961191"
+                    }
+                ],
+                "mensaje": "Si tu Docente TIC no está disponible, podés acceder al Buscador de credenciales dándole click en la siguiente imagen: ",
+                "imagen_debajo": "/assets/img/pasos_otros/acceso_campus/buscador_credenciales.png"
+            }
+        ]
+    }
+}

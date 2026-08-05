@@ -1,0 +1,76 @@
+{
+    "calendario": {
+        "titulo": "Calendario Académico de Módulos Transversales 2026",
+        "descripcion_corta": "Conocé las fechas importantes del calendario académico de los módulos transversales para el año 2026. Aquí encontrarás información sobre el inicio y cierre de cada módulo, así como las fechas de exámenes de reparación.",
+        "semestre 1": {
+            "nombre": "I Semestre",
+            "bloques": [
+                {
+                    "nombre": "Historia e identidad nacional",
+                    "inicio": "2026-04-20",
+                    "cierre": "2026-07-21"
+                },
+                {
+                    "nombre": "Adaptación al cambio climático",
+                    "inicio": "2026-05-18",
+                    "cierre": "2026-07-21"
+                },
+                {
+                    "nombre": "Orientación laboral",
+                    "inicio": "2026-07-22",
+                    "cierre": "2026-08-30"
+                },
+                {
+                    "nombre": "Identidad cultural",
+                    "inicio": "2026-08-31",
+                    "cierre": "2026-09-27"
+                },
+                {
+                    "nombre": "Cultura de paz",
+                    "inicio": "2026-08-31",
+                    "cierre": "2026-09-27"
+                },
+                {
+                    "nombre": "Identidad histórica y sociocultural de Nicaragua",
+                    "inicio": "2026-07-22",
+                    "cierre": "2026-08-30"
+                }
+            ]
+        },
+        "semestre_2": {
+            "nombre": "II Semestre",
+            "bloques": [
+                {
+                    "nombre": "Historia e identidad nacional",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                },
+                {
+                    "nombre": "Adaptación al cambio climático",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                },
+                {
+                    "nombre": "Orientación laboral",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                },
+                {
+                    "nombre": "Identidad cultural",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                },
+                {
+                    "nombre": "Cultura de paz",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                },
+                {
+                    "nombre": "Identidad histórica y sociocultural de Nicaragua",
+                    "inicio": "Por determinar",
+                    "cierre": "Por determinar"
+                }
+            ]
+        }
+    }
+}

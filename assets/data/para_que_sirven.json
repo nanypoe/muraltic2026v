@@ -1,0 +1,58 @@
+{
+  "para_que": [
+    {
+      "titulo": "¿Para qué sirven los Módulos Transversales?",
+      "descripcion": "Los módulos transversales sirven para complementar y enriquecer el conocimiento de tu área de estudio principal, brindándote habilidades y competencias aplicables a diferentes contextos laborales y personales. Su función principal es transformar la especialización técnica en una formación profesional integral, preparándote para responder con éxito a las exigencias del entorno laboral actual.",
+      "propositos": [
+        {
+          "titulo": "Fortalecer tu perfil académico",
+          "descripcion": "Añaden un valor diferencial a tu especialidad técnica mediante saberes integrales."
+        },
+        {
+          "titulo": "Preparación para el mundo laboral",
+          "descripcion": "Te dotan de herramientas prácticas para enfrentar los desafíos diarios de un empleo."
+        },
+        {
+          "titulo": "Adaptabilidad profesional",
+          "descripcion": "Te permiten ajustarte eficientemente a situaciones cambiantes y a diversos contextos de trabajo."
+        }
+      ],
+      "competencias": [
+        {
+          "nombre": "Pensamiento crítico y resolución de problemas",
+          "descripcion": "Capacidad de analizar situaciones complejas y tomar decisiones informadas en el entorno de trabajo."
+        },
+        {
+          "nombre": "Habilidades de comunicación y trabajo en equipo",
+          "descripcion": "Facilidad para coordinar, expresar ideas y colaborar eficazmente con otros profesionales."
+        },
+        {
+          "nombre": "Liderazgo y adaptabilidad",
+          "descripcion": "Destreza para guiar iniciativas y amoldarse a los cambios organizacionales y del entorno profesional."
+        },
+        {
+          "nombre": "Conciencia histórica, sociocultural y de identidad",
+          "descripcion": "Comprensión del contexto social y cultural local y nacional, fortaleciendo el sentido de pertenencia y arraigo."
+        },
+        {
+          "nombre": "Orientación socio-laboral",
+          "descripcion": "Preparación para la inserción en el mercado de trabajo y el ejercicio profesional ético."
+        },
+        {
+          "nombre": "Cultura de paz y convivencia",
+          "descripcion": "Competencia para promover el diálogo, la empatía y la resolución pacífica de conflictos."
+        },
+        {
+          "nombre": "Sensibilidad y compromiso ambiental",
+          "descripcion": "Capacidad para actuar de manera consciente ante el cambio climático y promover prácticas sostenibles en su área."
+        }
+      ],
+      "conexion": [
+        {
+          "titulo": "Los Módulos Transversales complementan a los módulos técnicos",
+          "descripcion": "Su propósito es entrelazar la formación técnica especializada con valores, pensamiento reflexivo, conciencia socioambiental y habilidades clave para el éxito en el mundo laboral real."
+        }
+      ]
+    }
+  ]
+}

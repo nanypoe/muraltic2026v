@@ -1,0 +1,52 @@
+{
+    "como_realizar_mt": {
+        "titulo": "¿Cómo realizo los Módulos Transversales?",
+        "descripcion_corta": "En este apartado encontrarás información de la metodología de realización de los módulos",
+        "atencion": "Los Módulos Transversales para este año 2026, siguen una estructura similar a medida que se van realizando. Que explicaremos a continuación de una forma general, pero que en cada apartado puedes expandir en su sección correspondiente. El orden con que se presentan los siguientes puntos es el orden sugerido para aproximarse a las actividades de cada módulo: ",
+        "puntos_clave": [
+            {
+                "unidades": [
+                    {
+                        "titulo": "Los Módulos Transversales se dividen en unidades",
+                        "explicacion": "Cada módulo se divide en varias unidades, normalmente son de 3 a 5. Cada unidad contendrá sus propias actividades, pero de manera general lo que nos vamos a encontrar son las secciones de: Material de estudio, Foros y Cuestionarios. Que abordaremos a continuación.",
+                        "ver_mas":"¿Querés saber cómo está estructurado cada módulo? Podés darle click a la siguiente tarjeta para más información",
+                        "tarjeta_url":""
+                    }
+                ]
+            },
+            {
+                "material_estudio": [
+                    {
+                        "titulo": "El material de estudio es la parte más importante de cada módulo",
+                        "imagen_arriba":"/assets/img/pasos_otros/como_realizar/material_estudio.png",
+                        "explicacion":"Normalmente se encuentra de primero en cada unidad. Dentro de cada enlace, se encuentre de uno a más documentos que pueden ser PDFs o presentaciones digitales que nos brindarán la información necesaria para las actividades evaluadas. Estos deben de ser leídos o estudiados según la forma de aprender del estudiante, pues lo prepararán para los foros y cuestionarios",
+                        "imagen_debajo":"/assets/img/pasos_otros/como_realizar/carpeta_material.png"
+                    }
+                ]
+            },
+            {
+                "foros":[
+                    {
+                        "titulo": "Los foros son un lugar de reflexión colectiva",
+                        "imagen_arriba":"/assets/img/pasos_otros/como_realizar/foro_preliminar.png",
+                        "explicacion":"La primera forma para probar el dominio de tus saberes y aprendizajes es comentando sobre el tema en cuestión en un foro. Aquí se pueden generar puntos de debates, cuestiones, reflexiones u opiniones que nacieron a raíz de la lectura y el estudio del material de estudio. Lo mejor es que podés compartir tus puntos de vista con otros estudiantes o profesores para que puedan discutirlos y aprender de ellos.",
+                        "ver_mas": "¿Querés saber cómo se realizan los foros? Podés darle click a la siguiente tarjeta para más información",
+                        "tarjeta_url":""
+
+                    }
+                ]
+            },
+            {
+                "cuestionarios":[
+                    {
+                        "titulo": "Los cuestionarios son una herramienta valiosa para evaluar el aprendizaje",
+                        "imagen_arriba":"/assets/img/pasos_otros/como_realizar/cuestionario_prelimar.png",
+                        "explicacion":"Una forma de probar con certeza de que has aprendido algo es esta evaluación tipo examen conocida como 'Cuestionarios' en la que a través de varias preguntas se te evaluarán las competencias de aprendizaje. Se debe de tener en cuenta que los resultados de cada cuestionario incidirán en tus calificaciones. Todos los cuestionarios tienen un valor de 0 a 100 puntos. La nota mínima para aprobar es de 60 puntos. Cada cuestionario tiene un máximo de 3 intentos. Si los fallás, se determinaría que está reprobado, por lo que deberías de consultar al Docente TIC sobre esto.",
+                        "ver_más":"¿Querés saber cómo se realizan los cuestionarios? Podés darle click a la siguiente tarjeta para más información",
+                        "tarjeta_url":""
+                    }
+                ]
+            }
+        ]
+    }
+}

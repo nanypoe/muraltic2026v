@@ -1,0 +1,574 @@
+{
+    "modulos_transversales": [
+        {
+            "nombre": "Historia e Identidad Nacional",
+            "descripcion": "Explorá la historia de Nicaragua y comprendé cómo nuestra identidad nacional se ha formado a lo largo del tiempo, reconociendo los eventos y personajes que han influido en nuestra cultura y sociedad.",
+            "icono": "history_edu",
+            "unidades_a_completar": 3,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Evolución Histórica y Sociocultural de Nicaragua",
+                    "descripcion": "Conocé los eventos históricos más importantes que han dado forma a nuestra nación, desde la época precolombina hasta la independencia.",
+                    "icono": "history_edu",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD1: Primeros pueblos originarios que habitaron Nicaragua",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD1: Impacto de la invasión europea, resistencia popular e independencia de Centroamérica y Nicaragua",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD1: La guerra nacional y la influencia británica en el caribe nicaragüense",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Resistencia, Soberanía y Transformaciones Sociales",
+                    "descripcion": "Analizá la lucha por la soberanía nacional, la Revolución Popular Sandinista y las transformaciones socioeconómicas en Nicaragua.",
+                    "icono": "flag",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD2: Intervensiones estadounidenses en Nicaragua",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Resistencia, soberanía y lucha contra la dictadura somocista",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Programa histórico y la Revolución Popular Sandinista",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Estatutos de Autonomía de la Costa Caribe",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Políticas de los gobiernos neoliberales",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Transformaciones del Gobierno de Reconciliación y Unidad Nacional en un Contexto Global Cambiante",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "El Patrimonio Nacional Nicaragüense",
+                    "descripcion": "Identificá y valorá el patrimonio natural, histórico y cultural de Nicaragua como pilar fundamental de nuestra identidad.",
+                    "icono": "account_balance",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD2: Patrimonio nacional nicaragüense",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD3: El Patrimonio Nacional Nicaragüense",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "nombre": "Adaptación al Cambio Climático",
+            "descripcion": "Comprendé los desafíos ambientalistas, la gestión del cambio climático y las acciones prácticas necesarias para mitigar riesgos e implementar prácticas sostenibles en tu entorno.",
+            "icono": "eco",
+            "unidades_a_completar": 4,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Gestión Ambiental y Cambio Climático",
+                    "descripcion": "Conocé los conceptos fundamentales sobre gestión ambiental, contaminación y los efectos directos del cambio climático.",
+                    "icono": "eco",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD1: Gestión ambiental de la contaminación y cambio climático",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD1: Gestión ambiental de la contaminación y cambio climático.",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Marco Legal de los Sistemas de Gestión Ambiental",
+                    "descripcion": "Estudiá las leyes y normativas nacionales que regulan la protección ambiental y los sistemas de gestión en el país.",
+                    "icono": "gavel",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD2: Marco legal nacional de los sistemas de gestión ambiental",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD2: Marco legal Nacional de los Sistemas de Gestión Ambiental.",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "Prácticas Ambientales en la Adaptación al Cambio Climático",
+                    "descripcion": "Aplicá acciones y técnicas sostenibles para reducir la huella ambiental y adaptarte a las variaciones climáticas.",
+                    "icono": "potted_plant",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD3: Prácticas ambientales en la adaptación al cambio climático",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD3: Prácticas ambientales en la adaptación al cambio climático",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 4,
+                    "nombre": "Gestión de Riesgos de Desastres ante Multiamenazas",
+                    "descripcion": "Aprendé a identificar vulnerabilidades y medidas de preparación, mitigación y respuesta preventiva ante desastres naturales.",
+                    "icono": "warning",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD4: Gestión de Riesgos de Desastres ante Multiamenazas",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD4: Gestión de riesgos de desastres ante multiamenazas",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "nombre": "Orientación Laboral",
+            "descripcion": "Desarrollá competencias para desenvolverte con éxito en el ámbito laboral, abarcando desde la legislación de los trabajadores hasta herramientas para la búsqueda activa de empleo.",
+            "icono": "work",
+            "unidades_a_completar": 4,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Generalidades de la Orientación Laboral",
+                    "descripcion": "Comprendé las dinámicas del mercado de trabajo, la formación profesional y el perfil ocupacional esperado.",
+                    "icono": "work",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UDI: Orientación Laboral",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UDI: Generalidades de la Orientación Laboral.",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Marco Legal Laboral",
+                    "descripcion": "Conocé los derechos, deberes, leyes laborales y el Código del Trabajo vigente para el ejercicio profesional ético.",
+                    "icono": "menu_book",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UDII: Conocimientos previos del Marco Legal",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UDII: Marco Legal Laboral",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "Requerimientos en la Búsqueda de Empleo",
+                    "descripcion": "Dominá las estrategias de elaboración de hojas de vida y planificación efectiva para insertarte en el mercado laboral.",
+                    "icono": "badge",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UDIII: Búsqueda de empleo",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UDIII: Requerimientos en la búsqueda de empleo.",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 4,
+                    "nombre": "Entrevista Laboral y Educación en Valores",
+                    "descripcion": "Preparate para destacar en entrevistas de trabajo y practicar valores clave para la convivencia e integración laboral.",
+                    "icono": "record_voice_over",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UDIV: Integración en el trabajo",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 1 UDIV: Requerimientos en la entrevista laboral y capacitaciones técnica en el área de trabajo",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 2 UDIV: Educación en Valores",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "nombre": "Identidad Histórica y Sociocultural de Nicaragua",
+            "descripcion": "Profundizá en las raíces socio-históricas, saberes populares y luchas de autodeterminación que han consolidado nuestra identidad nicaragüense.",
+            "icono": "groups",
+            "unidades_a_completar": 4,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Saberes Ancestrales y Populares de Nicaragua",
+                    "descripcion": "Reconocé el valor sociocultural de nuestras tradiciones, costumbres y conocimientos populares transmitidos de generación en generación.",
+                    "icono": "groups",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "UD1: Act 1.1. Foro- Reflexión saberes ancestrales y populares de Nicaragua",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "UD1: Act1.2-Cuest-Saberes ancestrales y populares de Nicaragua",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Espíritu de Resistencia por la Soberanía",
+                    "descripcion": "Analizá el pensamiento, ejemplo y legado de dignidad nacional desde Benjamín Zeledón hasta el General Augusto C. Sandino.",
+                    "icono": "military_tech",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "UD2: Act 2.1. Foro - Espíritu de resistencia por la soberanía y autodeterminación de Benjamín Zeledón a Sandino",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "UD2: Act.2.2-Cuest-Espíritu de resistencia por la soberanía y autodeterminación de Benjamín Zeledón a Sandino",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "Lucha del FSLN contra la Dictadura Somocista",
+                    "descripcion": "Estudiá la gesta heroica del Frente Sandinista de Liberación Nacional para derrocar a la dictadura y liberar a Nicaragua.",
+                    "icono": "auto_stories",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "UD3: Act 3.1. Foro - La lucha del FSLN contra la dictadura militar somocista",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "UD3: Act.3.2-Cuest-La lucha del FSLN contra la dictadura militar somocista",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 4,
+                    "nombre": "El Pueblo Presidente a partir de 2007",
+                    "descripcion": "Conocé los programas sociales, restitución de derechos y avances socioeconómicos alcanzados desde el año 2007.",
+                    "icono": "diversity_3",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "UD4: Act 4.1. Foro - El Pueblo Presidente a partir de 2007",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "UD4: Act.4.2-Cuest-El Pueblo Presidente a partir de 2007",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "nombre": "Identidad Cultural",
+            "descripcion": "Valorá el patrimonio tangible e intangible de Nicaragua, reflexionando sobre la importancia de la diversidad cultural e interculturalidad en el país.",
+            "icono": "palette",
+            "unidades_a_completar": 3,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Conceptos e Importancia de la Identidad Cultural",
+                    "descripcion": "Comprendé las bases conceptuales y la trascendencia de cultivar la identidad cultural en el desarrollo personal y comunitario.",
+                    "icono": "palette",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD1: Manifestaciones del patrimonio cultural",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD1: Conceptos de identidad cultural.",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UD1: Importancia identidad cultural",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Expresiones Culturales e Interculturalidad",
+                    "descripcion": "Explorá las distintas manifestaciones folklóricas, artísticas y el diálogo intercultural propio de las regiones de Nicaragua.",
+                    "icono": "theater_comedy",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro debate de la UD2: Proyectos culturales",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 1 de la UD2",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 2 de la UD2",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "Preservación y Salvaguarda del Patrimonio Cultural",
+                    "descripcion": "Fomentá la protección, rescate y difusión de las riquezas y tradiciones culturales de nuestras comunidades.",
+                    "icono": "museum",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro debate de la UD3: Protección de la identidad cultural",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 1 de la UD3",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario 2 de la UD3",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "nombre": "Cultura de Paz",
+            "descripcion": "Fomentá valores de convivencia armónica, resolución pacífica de conflictos, empatía y el respeto a los derechos humanos en todos los entornos.",
+            "icono": "handshake",
+            "unidades_a_completar": 3,
+            "detalle_unidades": [
+                {
+                    "unidad": 1,
+                    "nombre": "Marco Legal y Rol Ciudadano en la Cultura de Paz",
+                    "descripcion": "Conocé los aspectos de la Ley 985 y el rol de la ciudadanía en la construcción activa de un entorno pacífico.",
+                    "icono": "handshake",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro UD1: Manifestaciones del patrimonio cultural",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UI: Tema 2 Ley 985 Cultura de paz",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UI: Tema 3 Rol del ciudadano en la construcción de una cultura de paz",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 2,
+                    "nombre": "Habilidades Socioemocionales y Valores",
+                    "descripcion": "Desarrollá habilidades socioemocionales para la comunicación asertiva, la empatía y la vivencia de valores personales e interpersonales.",
+                    "icono": "psychology",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro debate de la UD2: Proyectos culturales",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UII: Tema2 Habilidades Socioemocionales",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UII: Tema 3 Tipos de Valores",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "unidad": 3,
+                    "nombre": "Principios, Valores y Código de Conducta",
+                    "descripcion": "Identificá los fundamentos éticos y las normas de convivencia responsable contenidas en el código de conducta.",
+                    "icono": "verified",
+                    "flujo_completacion": {
+                        "titulo": "¿Qué debemos hacer primero y qué después?",
+                        "descripcion": "Como toda unidad, primero se debe de leer/estudiar el material de estudio. Luego completar el foro y los cuestionarios. A continuación las actividades en orden de esta unidad: ",
+                        "orden": [
+                            {
+                                "tipo": "foro",
+                                "titulo": "Foro debate de la UD3: Protección de la identidad cultural",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UIII: Tema 2 Principios y Valores",
+                                "imagen_debajo": ""
+                            },
+                            {
+                                "tipo": "cuestionario",
+                                "titulo": "Cuestionario UIII: Tema 3 Fundamentos del Código de conducta",
+                                "imagen_debajo": ""
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
