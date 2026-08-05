@@ -40,7 +40,7 @@
                 "cuestionarios":[
                     {
                         "titulo": "Los cuestionarios son una herramienta valiosa para evaluar el aprendizaje",
-                        "imagen_arriba":"/assets/img/pasos_otros/como_realizar/cuestionario_prelimar.png",
+                        "imagen_arriba":"/assets/img/pasos_otros/como_realizar/cuestionario_preliminar.png",
                         "explicacion":"Una forma de probar con certeza de que has aprendido algo es esta evaluación tipo examen conocida como 'Cuestionarios' en la que a través de varias preguntas se te evaluarán las competencias de aprendizaje. Se debe de tener en cuenta que los resultados de cada cuestionario incidirán en tus calificaciones. Todos los cuestionarios tienen un valor de 0 a 100 puntos. La nota mínima para aprobar es de 60 puntos. Cada cuestionario tiene un máximo de 3 intentos. Si los fallás, se determinaría que está reprobado, por lo que deberías de consultar al Docente TIC sobre esto.",
                         "ver_más":"¿Querés saber cómo se realizan los cuestionarios? Podés darle click a la siguiente tarjeta para más información",
                         "tarjeta_url":""
