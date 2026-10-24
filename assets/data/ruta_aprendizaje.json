@@ -1,0 +1,63 @@
+{
+  "titulo": "Ruta de Aprendizaje: Aprender a usar el Campus Virtual",
+  "descripcion": "Sigue este orden de lo más sencillo a lo más importante para aprender a usar el Campus paso a paso.",
+  "lecciones": [
+    {
+      "id": 1,
+      "slug": "para-que",
+      "titulo": "1. ¿Para qué sirven los Módulos Transversales?",
+      "objetivo": "Entender por qué debes hacerlos antes de entrar al Campus.",
+      "tiempo_min": 3,
+      "ruta": "#/para-que",
+      "prerrequisito": null
+    },
+    {
+      "id": 2,
+      "titulo": "2. Antes de entrar: Credenciales",
+      "objetivo": "Saber qué son tus credenciales y dónde buscarlas.",
+      "tiempo_min": 2,
+      "ruta": "#/credenciales",
+      "prerrequisito": 1
+    },
+    {
+      "id": 3,
+      "titulo": "3. Acceso al Campus Virtual",
+      "objetivo": "Aprender a entrar por primera vez y qué hacer si hay error.",
+      "tiempo_min": 5,
+      "ruta": "#/guias/acceso-campus",
+      "prerrequisito": 2
+    },
+    {
+      "id": 4,
+      "titulo": "4. Estructura de un módulo",
+      "objetivo": "Diferenciar unidades, material, foros y cuestionarios.",
+      "tiempo_min": 4,
+      "ruta": "#/guias/como-realizar-modulos",
+      "prerrequisito": 3
+    },
+    {
+      "id": 5,
+      "titulo": "5. Participar en Foros",
+      "objetivo": "Aprender a crear tu participación paso a paso.",
+      "tiempo_min": 5,
+      "ruta": "#/guias/foros",
+      "prerrequisito": 4
+    },
+    {
+      "id": 6,
+      "titulo": "6. Resolver Cuestionarios",
+      "objetivo": "Aprender a responder y enviar tus cuestionarios.",
+      "tiempo_min": 5,
+      "ruta": "#/guias/cuestionarios",
+      "prerrequisito": 5
+    },
+    {
+      "id": 7,
+      "titulo": "7. Repaso y checklist",
+      "objetivo": "Verificar que sabes entrar, encontrar material, participar y responder.",
+      "tiempo_min": 3,
+      "ruta": "#/guias",
+      "prerrequisito": 6
+    }
+  ]
+}

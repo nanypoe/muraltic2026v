@@ -343,6 +343,26 @@ const App = {
     `;
   },
 
+  // Audio guiado a demanda
+  playGuideAudio(btn) {
+    const container = btn.closest("[data-guide-step]");
+    const audio = container?.querySelector("audio[data-guide-audio]");
+    const highlights = container?.querySelectorAll("[data-highlight]");
+    if (!audio) return;
+    if (audio.paused) {
+      highlights?.forEach((h) => h.classList.add("ring-4", "ring-amber-400", "ring-offset-2"));
+      audio.play().catch(() => {});
+      btn.querySelector(".audio-label").textContent = "Pausar explicación";
+    } else {
+      audio.pause();
+      btn.querySelector(".audio-label").textContent = "Escuchar explicación (opcional)";
+    }
+    audio.onended = () => {
+      highlights?.forEach((h) => h.classList.remove("ring-4", "ring-amber-400", "ring-offset-2"));
+      if (btn.querySelector(".audio-label")) btn.querySelector(".audio-label").textContent = "Escuchar explicación (opcional)";
+    };
+  },
+
   // Manejador de rutas SPA
   async route() {
     const app = document.getElementById("app");
@@ -378,6 +398,8 @@ const App = {
       await this.renderGuiaForos();
     } else if (hash === "#/guias/cuestionarios") {
       await this.renderGuiaCuestionarios();
+    } else if (hash === "#/ruta" || hash === "#/aprender") {
+      await this.renderRutaAprendizaje();
     } else if (hash === "#/credenciales") {
       await this.renderCredenciales();
     } else {
@@ -418,12 +440,15 @@ const App = {
                         </p>
 
                         <div class="pt-6 flex flex-wrap justify-center gap-4">
-                <a href="#/modulos" class="btn-3d px-8 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] flex items-center gap-2 touch-target">
-                    <span>🚀 Explorar Módulos</span>
-                </a>
-                <a href="#/para-que" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
-                    <span>💡 ¿Para qué me sirven?</span>
-                </a>
+                            <a href="#/ruta" class="btn-3d px-8 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] flex items-center gap-2 touch-target">
+                                <span>🗺️ Empezar ruta de aprendizaje</span>
+                            </a>
+                            <a href="#/modulos" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
+                                <span>🚀 Explorar Módulos</span>
+                            </a>
+                            <a href="#/para-que" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
+                                <span>💡 ¿Para qué me sirven?</span>
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -1057,15 +1082,22 @@ const App = {
                                 </div>
                             </details>
                         `;
+                        const audioUrl = p.audio?.url || "";
+                        const audioTrans = p.audio?.transcripcion || p.audio?.guion || "";
                         return `
-                                <article class="bg-slate-50 p-5 sm:p-6 rounded-2xl border-2 border-slate-200 space-y-3">
+                                <article class="bg-slate-50 p-5 sm:p-6 rounded-2xl border-2 border-slate-200 space-y-3" data-guide-step>
                                     <header class="flex items-center gap-3">
-                                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm flex-shrink-0">${p.paso}</span>
-                                        <h2 class="font-extrabold text-base text-slate-900">${p.titulo}</h2>
+                                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm flex-shrink-0" data-highlight>${p.paso}</span>
+                                        <h2 class="font-extrabold text-base text-slate-900" data-highlight>${p.titulo}</h2>
                                     </header>
                                     ${capa1}
                                     ${capa2}
-                                    ${this.stepToggleHTML(p.paso)}
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        ${audioUrl ? `<button type="button" onclick="App.playGuideAudio(this)" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs touch-target"><span>🔊</span><span class="audio-label">Escuchar explicación (opcional)</span></button>` : `<button type="button" disabled class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-300 text-slate-600 font-extrabold text-xs opacity-70">🔊 Audio pendiente (agrega URL MP3)</button>`}
+                                        ${this.stepToggleHTML(p.paso)}
+                                    </div>
+                                    ${audioUrl ? `<audio data-guide-audio src="${audioUrl}" preload="none"></audio>` : ""}
+                                    ${audioTrans ? `<details class="rounded-xl border border-slate-200 bg-white"><summary class="px-4 py-2 font-bold text-xs text-slate-700 cursor-pointer">Ver transcripción</summary><div class="px-4 pb-3 text-xs text-slate-600 leading-relaxed">${this.formatTextWithLinks(audioTrans)}</div></details>` : ""}
                                     ${
                                       p.docentes_tic
                                         ? `
@@ -1260,6 +1292,60 @@ const App = {
             </div>
         </div>
     `;
+  },
+
+  // RUTA DE APRENDIZAJE GUIADA
+  async renderRutaAprendizaje() {
+    const app = document.getElementById("app");
+    const data = await this.fetchJSON("ruta_aprendizaje.json");
+    if (!data || !data.lecciones) {
+      app.innerHTML = `<div class="p-8 text-center text-rose-600 font-bold">Error al cargar ruta_aprendizaje.json</div>`;
+      return;
+    }
+    let completadas = [];
+    try {
+      completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]");
+    } catch (e) {}
+    app.innerHTML = `
+      <div class="animate-pop max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+        <a href="#/" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">← Volver al inicio</a>
+        <div class="bg-gradient-to-br from-indigo-700 to-purple-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
+          <h1 class="text-3xl sm:text-5xl font-black mb-3">${data.titulo}</h1>
+          <p class="text-indigo-50 font-semibold">${data.descripcion}</p>
+        </div>
+        <div class="space-y-4">
+          ${data.lecciones.map((l, idx) => {
+            const done = completadas.includes(l.id);
+            const prev = idx === 0 || completadas.includes(data.lecciones[idx-1].id);
+            return `
+              <div class="bg-white p-5 sm:p-6 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl ${done ? "bg-emerald-600" : "bg-indigo-700"} text-white font-black flex items-center justify-center text-xl">${done ? "✓" : l.id}</div>
+                  <div>
+                    <h2 class="text-lg sm:text-xl font-black text-slate-900">${l.titulo}</h2>
+                    <p class="text-sm text-slate-600 font-medium">${l.objetivo}</p>
+                    <p class="text-xs text-slate-500 font-bold mt-1">Tiempo estimado: ${l.tiempo_min} min</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                  ${done ? `<span class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold text-xs">Completado</span>` : prev ? `<a href="${l.ruta}" class="btn-3d px-6 py-3 rounded-2xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-sm">Continuar →</a>` : `<span class="px-4 py-2 rounded-xl bg-slate-200 text-slate-600 font-extrabold text-xs">Completa la lección anterior</span>`}
+                  ${!done && prev ? `<button onclick="App.marcarLeccion(${l.id})" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold text-xs">Marcar como completada</button>` : ""}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  },
+
+  marcarLeccion(id) {
+    try {
+      const arr = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]");
+      if (!arr.includes(id)) arr.push(id);
+      localStorage.setItem("muraltic-ruta", JSON.stringify(arr));
+    } catch (e) {}
+    this.route();
   },
 
   // 6. BUSCADOR DE CREDENCIALES (credenciales.json + estudiantes.json)

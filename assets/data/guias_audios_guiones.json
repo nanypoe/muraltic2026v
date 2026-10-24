@@ -1,0 +1,93 @@
+{
+  "formato_sugerido": {
+    "tipo": "mp3",
+    "kbps": 96,
+    "canal": "mono",
+    "max_segundos": 25,
+    "nota": "Graba en MP3 mono 64-96kbps. Corto y directo. Sin música de fondo. Usa micrófono claro."
+  },
+  "instrucciones_grabacion": "Graba cada guion tal como está. Señala verbalmente lo que se ve: 'Mira aquí...', 'Fíjate en el botón...'. No leas todo el párrafo, guía la acción.",
+  "acceso_campus": [
+    {
+      "paso": 1,
+      "titulo": "Ingresar a la página web del Campus Virtual del INATEC",
+      "guion": "Aviso: aquí hay una imagen. Mira la dirección web que aparece. Fíjate en la barra de navegación. Ahí es donde vas a escribir esa dirección o escanear el código QR que se muestra. Toca o escribe con cuidado esa dirección para ir al Campus.",
+      "transcripcion": "Mira la imagen. Vas a escribir la dirección del Campus Virtual en la barra de navegación de tu celular o computadora, o escanear el código QR que aparece. Ahí empezarás a entrar.",
+      "duracion_sugerida_seg": 16
+    },
+    {
+      "paso": 2,
+      "titulo": "Buscar e ingresar las credenciales de acceso.",
+      "guion": "Mira aquí. Fíjate en la pantalla que dice inicio o entrar. Ahí van dos casillas: una para usuario y otra para contraseña. Escribe tal como te las dieron, sin espacios. Luego fíjate en el botón que dice 'Acceder'. Toca ese botón para entrar.",
+      "transcripcion": "En esta pantalla ingresa tu usuario y tu contraseña exactamente como te las entregaron. Luego toca el botón 'Acceder'.",
+      "duracion_sugerida_seg": 16
+    },
+    {
+      "paso": 3,
+      "titulo": "¿Qué hacer si me aparece un mensaje de 'Acceso inválido'?",
+      "guion": "Si te sale ese mensaje en rojo, no te preocupes. Primero revisa que escribiste bien usuario y contraseña. Si sigue saliendo, fíjate aquí: puedes contactar a uno de los Docentes TIC que aparecen con su foto. O si no están, usa el Buscador de Credenciales tocando la imagen que se indica.",
+      "transcripcion": "Si aparece 'Acceso inválido', revisa bien tus datos. Si persiste el error, contacta a un Docente TIC o usa el Buscador de Credenciales.",
+      "duracion_sugerida_seg": 18
+    }
+  ],
+  "foros": [
+    {
+      "paso": 1,
+      "titulo": "Identificar el foro",
+      "guion": "Mira aquí. Fíjate en el título del foro. Debajo hay un texto corto que te dice qué debes hacer. Léelo con calma, eso te indica el tema a tratar.",
+      "transcripcion": "Lee el título y el texto que te indica qué debes hacer en ese foro.",
+      "duracion_sugerida_seg": 12
+    },
+    {
+      "paso": 2,
+      "titulo": "Añadir un nuevo tema de debate",
+      "guion": "Fíjate en el botón rojo que dice 'Añadir un nuevo tema de debate'. Tócalo. Se abrirá un formulario para crear tu participación.",
+      "transcripcion": "Toca el botón 'Añadir un nuevo tema de debate' para abrir el formulario.",
+      "duracion_sugerida_seg": 10
+    },
+    {
+      "paso": 3,
+      "titulo": "Rellenar asunto y mensaje",
+      "guion": "Mira aquí. En 'Asunto' escribe un título corto sobre lo que vas a hablar. En 'Mensaje' escribe tu comentario o reflexión con tus palabras. Si necesitas, ahí también hay opciones para adjuntar, pero con eso basta.",
+      "transcripcion": "Escribe el asunto y tu mensaje en las casillas correspondientes.",
+      "duracion_sugerida_seg": 14
+    },
+    {
+      "paso": 4,
+      "titulo": "Enviar la participación",
+      "guion": "Revisa rápido lo que escribiste. Luego fíjate en el botón para enviar. Tócalo para publicar tu participación en el foro.",
+      "transcripcion": "Revisa tu mensaje y toca el botón para enviar.",
+      "duracion_sugerida_seg": 10
+    }
+  ],
+  "cuestionarios": [
+    {
+      "paso": 1,
+      "titulo": "Identificar el cuestionario",
+      "guion": "Mira aquí. Fíjate en el nombre del cuestionario. Ahí te dice qué unidad o tema vas a repasar. Abrelo solo cuando estés listo.",
+      "transcripcion": "Identifica el cuestionario correspondiente a la unidad que debes resolver.",
+      "duracion_sugerida_seg": 10
+    },
+    {
+      "paso": 2,
+      "titulo": "Leer las indicaciones",
+      "guion": "Antes de responder, lee las indicaciones con calma. Ahí te dicen cuántas preguntas hay o alguna recomendación. Toma un momento para leerlas.",
+      "transcripcion": "Lee las indicaciones del cuestionario antes de empezar a responder.",
+      "duracion_sugerida_seg": 12
+    },
+    {
+      "paso": 3,
+      "titulo": "Responder las preguntas",
+      "guion": "Mira una por una las preguntas. Lee bien cada pregunta y cada opción. Selecciona solo la respuesta que creas correcta. Si hay varios tipos, fíjate en lo que te piden: marcar, completar o elegir.",
+      "transcripcion": "Responde pregunta por pregunta, leyendo bien cada enunciado y sus opciones.",
+      "duracion_sugerida_seg": 16
+    },
+    {
+      "paso": 4,
+      "titulo": "Revisar y enviar",
+      "guion": "Antes de enviar, revisa rápido las respuestas que marcaste. Cuando estés seguro, fíjate en el botón para enviar o finalizar. Tócalo para enviar el cuestionario.",
+      "transcripcion": "Revisa tus respuestas y envía el cuestionario cuando estés listo.",
+      "duracion_sugerida_seg": 12
+    }
+  ]
+}

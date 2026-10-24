@@ -234,14 +234,14 @@
           <span class="text-lg">🏠</span>
           <span class="text-[10px] font-extrabold">Inicio</span>
         </a>
-        <a href="#/modulos" data-bottom="modulos" class="flex flex-col items-center justify-center gap-1 py-2 text-slate-600 hover:text-indigo-600 transition-all touch-target">
-          <span class="text-lg">📚</span>
-          <span class="text-[10px] font-extrabold">Módulos</span>
-        </a>
-        <a href="#/guias" data-bottom="guias" class="flex flex-col items-center justify-center gap-1 py-2 text-slate-600 hover:text-indigo-600 transition-all touch-target">
-          <span class="text-lg">📖</span>
-          <span class="text-[10px] font-extrabold">Guías</span>
-        </a>
+            <a href="#/modulos" data-bottom="modulos" class="flex flex-col items-center justify-center gap-1 py-2 text-slate-600 hover:text-indigo-600 transition-all touch-target">
+              <span class="text-lg">📚</span>
+              <span class="text-[10px] font-extrabold">Módulos</span>
+            </a>
+            <a href="#/ruta" data-bottom="ruta" class="flex flex-col items-center justify-center gap-1 py-2 text-slate-600 hover:text-indigo-600 transition-all touch-target">
+              <span class="text-lg">🗺️</span>
+              <span class="text-[10px] font-extrabold">Aprende</span>
+            </a>
         <a href="#/credenciales" data-bottom="credenciales" class="flex flex-col items-center justify-center gap-1 py-2 text-slate-600 hover:text-indigo-600 transition-all touch-target">
           <span class="text-lg">🔑</span>
           <span class="text-[10px] font-extrabold">Acceso</span>
@@ -276,7 +276,12 @@
             return;
           }
           if(hash.startsWith('#/guias')){
-            const a = document.querySelector('#bottom-nav a[data-bottom="guias"]');
+            const a = document.querySelector('#bottom-nav a[data-bottom="ruta"]');
+            if(a){ a.classList.add('text-indigo-600','bg-indigo-50'); a.setAttribute('aria-current','page'); }
+            return;
+          }
+          if(hash === '#/ruta' || hash === '#/aprender'){
+            const a = document.querySelector('#bottom-nav a[data-bottom="ruta"]');
             if(a){ a.classList.add('text-indigo-600','bg-indigo-50'); a.setAttribute('aria-current','page'); }
             return;
           }
