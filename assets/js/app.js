@@ -215,6 +215,40 @@ const App = {
       live.textContent = heading?.textContent?.trim() || "Contenido actualizado";
     }
     if (app) app.focus({ preventScroll: true });
+    this.renderLearnIndex();
+  },
+
+  toggleLearnIndex() {
+    const panel = document.getElementById("learn-index");
+    if (!panel) return;
+    panel.classList.toggle("hidden");
+    this.renderLearnIndex();
+  },
+
+  async renderLearnIndex() {
+    const panel = document.getElementById("learn-index");
+    const toggle = document.getElementById("learn-toggle");
+    const list = document.getElementById("learn-index-list");
+    if (!panel || !toggle || !list) return;
+    const hash = window.location.hash || "#/";
+    const isGuide = hash.startsWith("#/guias") || hash === "#/ruta" || hash === "#/aprender" || hash === "#/para-que" || hash === "#/credenciales";
+    toggle.classList.toggle("hidden", !isGuide);
+    if (!isGuide) {
+      panel.classList.add("hidden");
+      return;
+    }
+    const data = await this.fetchJSON("ruta_aprendizaje.json");
+    if (!data || !data.lecciones) {
+      list.innerHTML = `<div class="p-4 text-xs text-slate-600">No hay índice disponible</div>`;
+      return;
+    }
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch (e) {}
+    list.innerHTML = data.lecciones.map((l) => {
+      const done = completadas.includes(l.id);
+      const active = hash === l.ruta;
+      return `<a href="${l.ruta}" class="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 ${active ? "bg-indigo-50" : ""}"><span class="w-7 h-7 rounded-lg ${done ? "bg-emerald-600" : "bg-slate-200 text-slate-700"} text-white flex items-center justify-center text-xs">${done ? "✓" : l.id}</span><div class="flex-1"><div class="text-xs font-extrabold text-slate-900">${l.titulo}</div></div></a>`;
+    }).join("");
   },
 
   // Helper: Formatear fechas de "AAAA-MM-DD" a "22 de agosto de 2026"
@@ -423,31 +457,28 @@ const App = {
     const gen = data.generalidades;
 
     app.innerHTML = `
-            <div class="animate-pop space-y-12">
-                <section class="bg-gradient-to-b from-indigo-900 via-indigo-800 to-slate-900 text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b-8 border-yellow-400">
-                    <div class="max-w-5xl mx-auto text-center space-y-6">
+            <div class="animate-pop space-y-10">
+                <section class="bg-gradient-to-b from-indigo-900 via-indigo-800 to-slate-900 text-white pt-10 pb-14 px-4 sm:px-6 lg:px-8 border-b-4 border-yellow-400">
+                    <div class="max-w-4xl mx-auto text-center space-y-5">
                         <span class="inline-block px-4 py-1.5 rounded-full bg-yellow-400 text-indigo-950 font-black text-xs uppercase tracking-widest shadow-md">
                             ${gen.badge || "MURAL TIC VIRTUAL"}
                         </span>
-                        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
-                            ${gen.titulo}
+                        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                            Aprende a usar el Campus Virtual paso a paso
                         </h1>
-                        <p class="text-xl sm:text-2xl font-bold text-indigo-200 max-w-3xl mx-auto">
-                            ${gen.subtitulo}
+                        <p class="text-lg sm:text-xl font-bold text-indigo-100 max-w-2xl mx-auto">
+                            Para usarlo por primera vez, sin rodeos y con voz guía.
                         </p>
-                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
-                            ${this.formatTextWithLinks(gen.descripcion_larga || gen.descripcion_corta)}
+                        <p class="text-base text-slate-200 max-w-2xl mx-auto font-medium leading-relaxed">
+                            ${this.formatTextWithLinks(gen.descripcion_corta || "")}
                         </p>
 
-                        <div class="pt-6 flex flex-wrap justify-center gap-4">
-                            <a href="#/ruta" class="btn-3d px-8 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] flex items-center gap-2 touch-target">
+                        <div class="pt-4 flex flex-wrap justify-center gap-3">
+                            <a href="#/ruta" class="btn-3d px-7 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] touch-target">
                                 <span>🗺️ Empezar ruta de aprendizaje</span>
                             </a>
-                            <a href="#/modulos" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
-                                <span>🚀 Explorar Módulos</span>
-                            </a>
-                            <a href="#/para-que" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
-                                <span>💡 ¿Para qué me sirven?</span>
+                            <a href="#/guias/acceso-campus" class="btn-3d px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 touch-target">
+                                <span>🔑 Aprender a entrar</span>
                             </a>
                         </div>
                     </div>
@@ -1306,37 +1337,43 @@ const App = {
     try {
       completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]");
     } catch (e) {}
+    const first = data.lecciones[0];
+    const next = data.lecciones.find((l, idx) => !completadas.includes(l.id) && (idx === 0 || completadas.includes(data.lecciones[idx-1].id)));
     app.innerHTML = `
-      <div class="animate-pop max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-        <a href="#/" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">← Volver al inicio</a>
-        <div class="bg-gradient-to-br from-indigo-700 to-purple-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
-          <h1 class="text-3xl sm:text-5xl font-black mb-3">${data.titulo}</h1>
-          <p class="text-indigo-50 font-semibold">${data.descripcion}</p>
+      <div class="animate-pop max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <a href="#/" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm touch-target">← Volver al inicio</a>
+          ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-sm touch-target">Seguir: ${next.titulo.split('. ')[1] || next.titulo} →</a>` : `<span class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-extrabold text-sm">¡Ruta completada!</span>`}
         </div>
-        <div class="space-y-4">
+        <div class="bg-gradient-to-br from-indigo-700 to-purple-700 text-white p-6 sm:p-9 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
+          <h1 class="text-3xl sm:text-5xl font-black mb-2">${data.titulo}</h1>
+          <p class="text-indigo-50 font-semibold max-w-2xl">${data.descripcion}</p>
+          <div class="mt-3 text-sm font-bold text-indigo-100">Progreso: ${completadas.length} / ${data.lecciones.length} lecciones</div>
+        </div>
+        <div class="space-y-3">
           ${data.lecciones.map((l, idx) => {
             const done = completadas.includes(l.id);
             const prev = idx === 0 || completadas.includes(data.lecciones[idx-1].id);
             return `
-              <div class="bg-white p-5 sm:p-6 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 rounded-2xl ${done ? "bg-emerald-600" : "bg-indigo-700"} text-white font-black flex items-center justify-center text-xl">${done ? "✓" : l.id}</div>
+              <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-900 shadow-[0_4px_0_#0f172a] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl ${done ? "bg-emerald-600" : "bg-indigo-700"} text-white font-black flex items-center justify-center">${done ? "✓" : l.id}</div>
                   <div>
-                    <h2 class="text-lg sm:text-xl font-black text-slate-900">${l.titulo}</h2>
-                    <p class="text-sm text-slate-600 font-medium">${l.objetivo}</p>
-                    <p class="text-xs text-slate-500 font-bold mt-1">Tiempo estimado: ${l.tiempo_min} min</p>
+                    <div class="font-black text-slate-900">${l.titulo}</div>
+                    <div class="text-xs text-slate-600">${l.objetivo} • ${l.tiempo_min} min</div>
                   </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-2">
-                  ${done ? `<span class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold text-xs">Completado</span>` : prev ? `<a href="${l.ruta}" class="btn-3d px-6 py-3 rounded-2xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-sm">Continuar →</a>` : `<span class="px-4 py-2 rounded-xl bg-slate-200 text-slate-600 font-extrabold text-xs">Completa la lección anterior</span>`}
-                  ${!done && prev ? `<button onclick="App.marcarLeccion(${l.id})" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold text-xs">Marcar como completada</button>` : ""}
+                <div class="flex items-center gap-2">
+                  ${done ? `<span class="px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-extrabold">Completado</span>` : prev ? `<a href="${l.ruta}" class="px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-extrabold">Ir a esta lección →</a>` : `<span class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-600 text-xs font-extrabold">Bloqueado</span>`}
+                  ${!done && prev ? `<button onclick="App.marcarLeccion(${l.id}); event.stopPropagation();" class="px-3 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-extrabold">Marcar completado</button>` : ""}
                 </div>
-              </div>
+              </article>
             `;
           }).join("")}
         </div>
       </div>
     `;
+    this.renderLearnIndex();
   },
 
   marcarLeccion(id) {
