@@ -547,6 +547,7 @@ const App = {
   async renderParaQue() {
     const app = document.getElementById("app");
     const data = await this.fetchJSON("para_que_sirven.json");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
 
     if (!data || !data.para_que || !data.para_que[0]) {
       app.innerHTML = `<div class="p-8 text-center text-rose-600 font-bold">Error al cargar para_que_sirven.json</div>`;
@@ -554,10 +555,33 @@ const App = {
     }
 
     const pq = data.para_que[0];
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/para-que");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    }
 
     app.innerHTML = `
-            <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-                <div class="bg-amber-400 p-8 sm:p-12 rounded-3xl border-4 border-slate-900 shadow-[0_10px_0_#0f172a] text-slate-900">
+            <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+                ${nav}
+                <div class="bg-amber-400 p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_10px_0_#0f172a] text-slate-900">
                     <h1 class="text-3xl sm:text-5xl font-black mb-4">${pq.titulo}</h1>
                     <p class="text-base sm:text-lg font-bold text-slate-900 max-w-3xl leading-relaxed">
                         ${this.formatTextWithLinks(pq.descripcion)}
@@ -568,19 +592,21 @@ const App = {
                     <h2 class="text-2xl font-black text-slate-900 mb-6 flex items-center gap-2">
                         <span>🎯</span> Propósitos Fundamentales
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        ${(pq.propositos || [])
-                          .map(
-                            (p) => `
-                            <div class="bg-white p-6 rounded-3xl border-4 border-slate-200 card-playful">
-                                <h3 class="text-xl font-black text-indigo-600 mb-2">${p.titulo}</h3>
-                                <p class="text-sm font-medium text-slate-600">${this.formatTextWithLinks(p.descripcion)}</p>
-                            </div>
-                        `,
-                          )
-                          .join("")}
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            ${(pq.propositos || [])
+                              .map(
+                                (p) => `
+                                <div class="bg-white p-6 rounded-3xl border-4 border-slate-200 card-playful">
+                                    <h3 class="text-xl font-black text-indigo-700 mb-2">${p.titulo}</h3>
+                                    <p class="text-sm font-medium text-slate-700">${this.formatTextWithLinks(p.descripcion)}</p>
+                                </div>
+                            `,
+                              )
+                              .join("")}
+                        </div>
                     </div>
-                </div>
+
+                    ${nav ? `<div class="pt-4">${nav}</div>` : ""}
 
                 <div>
                     <h2 class="text-2xl font-black text-slate-900 mb-6 flex items-center gap-2">
@@ -839,6 +865,7 @@ const App = {
   async renderComoRealizarModulos() {
     const app = document.getElementById("app");
     const data = await this.fetchJSON("como_realizar_modulo.json");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
 
     if (!data || !data.como_realizar_mt) {
       app.innerHTML = `<div class="p-8 text-center text-rose-600 font-bold">Error al cargar como_realizar_modulo.json</div>`;
@@ -846,11 +873,34 @@ const App = {
     }
 
     const info = data.como_realizar_mt;
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/guias/como-realizar-modulos");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    }
 
     app.innerHTML = `
-        <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
-                ← Volver a Guías
+        <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+            ${nav}
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm touch-target">
+                ← Guías
             </a>
 
             <div class="bg-gradient-to-br from-indigo-700 to-purple-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
@@ -1065,6 +1115,7 @@ const App = {
   async renderGuiaAcceso() {
     const app = document.getElementById("app");
     const data = await this.fetchJSON("como_ingresar_a_campus.json");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
     const acc = data?.acceso_campus;
 
     if (!acc) {
@@ -1072,10 +1123,34 @@ const App = {
       return;
     }
 
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/guias/acceso-campus");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     app.innerHTML = `
-        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
-                ← Volver a Guías
+        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+            ${nav}
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm touch-target">
+                ← Guías
             </a>
 
             <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
@@ -1160,6 +1235,7 @@ const App = {
                       })
                       .join("")}
                 </div>
+            ${nav}
             </div>
         </div>
     `;
@@ -1169,6 +1245,7 @@ const App = {
   async renderGuiaForos() {
     const app = document.getElementById("app");
     const data = await this.fetchJSON("como_realizar_foro.json");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
     const fo = data?.foro;
 
     if (!fo) {
@@ -1176,10 +1253,34 @@ const App = {
       return;
     }
 
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/guias/foros");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     app.innerHTML = `
-        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
-                ← Volver a Guías
+        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+            ${nav}
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm touch-target">
+                ← Guías
             </a>
 
             <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
@@ -1238,6 +1339,7 @@ const App = {
   async renderGuiaCuestionarios() {
     const app = document.getElementById("app");
     const data = await this.fetchJSON("como_realizar_cuestionario.json");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
     const cu = data?.cuestionario;
 
     if (!cu) {
@@ -1245,10 +1347,34 @@ const App = {
       return;
     }
 
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/guias/cuestionarios");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     app.innerHTML = `
-        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
-                ← Volver a Guías
+        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+            ${nav}
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm touch-target">
+                ← Guías
             </a>
 
             <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
@@ -1388,6 +1514,7 @@ const App = {
   // 6. BUSCADOR DE CREDENCIALES (credenciales.json + estudiantes.json)
   async renderCredenciales() {
     const app = document.getElementById("app");
+    const ruta = await this.fetchJSON("ruta_aprendizaje.json");
 
     // Cargar ambos archivos
     const [credData, estudiantesData] = await Promise.all([
@@ -1401,6 +1528,31 @@ const App = {
     if (!info) {
       app.innerHTML = `<div class="p-8 text-center text-rose-600 font-bold">Error al cargar credenciales.json</div>`;
       return;
+    }
+
+    let completadas = [];
+    try { completadas = JSON.parse(localStorage.getItem("muraltic-ruta") || "[]"); } catch(e){}
+    let nav = "";
+    if (ruta?.lecciones) {
+      const lecciones = ruta.lecciones;
+      const idx = lecciones.findIndex((l) => l.ruta === "#/credenciales");
+      if (idx >= 0) {
+        const prev = lecciones[idx-1];
+        const next = lecciones[idx+1];
+        const cur = lecciones[idx];
+        nav = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs touch-target">← Índice</a>
+            <div class="flex items-center gap-2">
+              ${prev ? `<a href="${prev.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">← Anterior</a>` : ""}
+              <button onclick="App.marcarLeccion(${cur.id});" class="px-4 py-2 rounded-xl ${completadas.includes(cur.id) ? 'bg-emerald-600 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'} font-extrabold text-xs">${completadas.includes(cur.id) ? 'Completado ✓' : 'Marcar completado'}</button>
+              ${next ? `<a href="${next.ruta}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs">Siguiente →</a>` : `<a href="#/ruta" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs">Ver ruta →</a>`}
+            </div>
+          </div>
+        `;
+      }
+    } else {
+      nav = `<div class="flex items-center justify-between"><a href="#/ruta" class="inline-flex items-center gap-2 font-black text-indigo-700 hover:underline text-sm">← Ruta de aprendizaje</a></div>`;
     }
 
     // Estado del buscador (sin centro ni ingreso)
@@ -1665,7 +1817,8 @@ const App = {
     // ========== RENDER PRINCIPAL ==========
 
     app.innerHTML = `
-        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+        <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+            ${nav}
             <div class="bg-emerald-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] text-center space-y-3">
                 <span class="text-4xl">🔑</span>
                 <h1 class="text-3xl sm:text-5xl font-black">${info.titulo}</h1>
