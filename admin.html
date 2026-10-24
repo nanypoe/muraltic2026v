@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Local - Mural TIC Virtual</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <header class="bg-slate-900 text-white border-b-4 border-indigo-600">
+    <div class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-black">Panel Admin Local</h1>
+        <p class="text-sm text-slate-300">Editar contenido localmente y guardar JSON</p>
+      </div>
+      <a href="index.html" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-extrabold text-sm">Ver sitio</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <section class="bg-white rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] overflow-hidden">
+      <div class="p-6 border-b-2 border-slate-100 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-black text-slate-900">Calendario</h2>
+          <p class="text-sm text-slate-600">Ocultar/mostrar semestres y editar fechas</p>
+        </div>
+        <button id="save-cal" class="btn-3d px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold">Guardar calendario.json</button>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="flex flex-wrap items-center gap-4">
+          <label class="flex items-center gap-2 font-bold text-sm"><input type="checkbox" id="show-sem1" class="w-5 h-5"> Mostrar Semestre 1</label>
+          <label class="flex items-center gap-2 font-bold text-sm"><input type="checkbox" id="show-sem2" class="w-5 h-5"> Mostrar Semestre 2</label>
+        </div>
+        <div id="cal-sections" class="space-y-6"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

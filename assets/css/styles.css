@@ -1,14 +1,61 @@
+:root {
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-heading: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
+
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+}
+
+button, a, [role="button"], input, select, textarea {
+    min-height: 48px;
+    min-width: 48px;
+}
+
+:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.touch-target {
+    min-height: 48px;
+    min-width: 48px;
 }
 
 /* Efecto de botón 3D tipo Duolingo / Gamificado */
 .btn-3d {
     transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
 }
 
 .btn-3d:active {
@@ -64,13 +111,32 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 /* Estilos de enlaces embebidos automáticamente */
 .text-link-auto {
-    color: #4f46e5;
+    color: #312e81;
     font-weight: 700;
     text-decoration: underline;
-    word-break: break-all;
+    text-underline-offset: 2px;
+    word-break: break-word;
     transition: color 0.15s ease;
 }
 
 .text-link-auto:hover {
-    color: #3730a3;
+    color: #1e1b4b;
+}
+
+/* Accesibilidad: reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Acordeón para guías */
+.guia-details summary {
+    list-style: none;
+}
+.guia-details summary::-webkit-details-marker {
+    display: none;
 }

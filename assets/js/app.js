@@ -67,18 +67,47 @@ const App = {
                 </div>
             `;
     } else {
-      return `
-                <div class="my-6 p-6 rounded-3xl bg-amber-50 border-3 border-amber-300 text-amber-900 flex items-center gap-4 shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-200 text-amber-700 flex items-center justify-center text-2xl flex-shrink-0 font-black">
-                        🎬
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-base">${title}</h4>
-                        <p class="text-xs font-semibold text-amber-800 mt-0.5">El contenido en video para este apartado estará disponible próximamente en el canal oficial.</p>
-                    </div>
-                </div>
-            `;
+      return this.renderMediaPlaceholder({
+        type: "video",
+        title: title,
+        context: title,
+        desc: "No se ha proporcionado una URL embebible de video para este apartado.",
+        suggested: "Sube el video a YouTube (o plataforma embebible) y pega la URL aquí para que se muestre automáticamente.",
+      });
     }
+  },
+
+  // Placeholder para recursos multimedia faltantes (sin inventar contenido)
+  renderMediaPlaceholder({ type = "image", title = "Recurso pendiente", desc = "", suggested = "", context = "" } = {}) {
+    const icons = {
+      image: "🖼️",
+      infografia: "📊",
+      video: "🎬",
+      audio: "🎧",
+      captura: "📸",
+      diagrama: "🗺️",
+      archivo: "📎",
+    };
+    const icon = icons[type] || "🖼️";
+    const descText =
+      desc ||
+      "No hay recurso multimedia disponible para este apartado. Este espacio se deja intencionalmente para que lo proporciones manualmente.";
+    const suggestedText =
+      suggested ||
+      "Pásame el archivo o URL embebible (ej. YouTube) con la descripción de lo que debe mostrar para integrarlo.";
+    const ctx = context || title || "";
+    return `
+            <div class="my-4 p-4 sm:p-5 rounded-2xl border-2 border-dashed border-amber-400 bg-amber-50/80 text-amber-900 flex items-start gap-3" role="note" aria-label="Recurso multimedia pendiente">
+                <div class="w-10 h-10 rounded-xl bg-amber-200 text-amber-800 flex items-center justify-center text-xl flex-shrink-0">${icon}</div>
+                <div class="space-y-1">
+                    <div class="font-extrabold text-sm">FALTA RECURSO: ${String(type).toUpperCase()}${ctx ? " — " + ctx : ""}</div>
+                    <div class="text-xs font-semibold leading-relaxed">${descText}</div>
+                    <div class="text-[11px] font-medium leading-relaxed text-amber-800/90">Acción: ${suggestedText}</div>
+                    <div class="text-[11px] text-amber-700/80">Ruta sugerida (si es imagen/captura): assets/img/pasos_otros/[sección]/nombre-descriptivo.png</div>
+                </div>
+            </div>
+            <!-- FALTA RECURSO: tipo=${type} | contexto=${ctx.replace(/"/g, "'")} | acción=subir a YouTube/plataforma embebible o agregar archivo local -->
+        `;
   },
 
   // Configuración de inicialización y enrutado
@@ -225,12 +254,12 @@ const App = {
                         </p>
 
                         <div class="pt-6 flex flex-wrap justify-center gap-4">
-                            <a href="#/modulos" class="btn-3d px-8 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] flex items-center gap-2">
-                                <span>🚀 Explorar Módulos</span>
-                            </a>
-                            <a href="#/para-que" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2">
-                                <span>💡 ¿Para qué me sirven?</span>
-                            </a>
+                <a href="#/modulos" class="btn-3d px-8 py-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black text-base shadow-[0_6px_0_#ca8a04] flex items-center gap-2 touch-target">
+                    <span>🚀 Explorar Módulos</span>
+                </a>
+                <a href="#/para-que" class="btn-3d px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-base border-2 border-white/20 flex items-center gap-2 touch-target">
+                    <span>💡 ¿Para qué me sirven?</span>
+                </a>
                         </div>
                     </div>
                 </section>
@@ -392,7 +421,7 @@ const App = {
                                     <h3 class="text-2xl font-black text-slate-900 mb-3">${m.nombre}</h3>
                                     <p class="text-sm font-medium text-slate-600 leading-relaxed mb-6">${this.formatTextWithLinks(m.descripcion)}</p>
                                 </div>
-                                <a href="#/modulo/${slug}" class="btn-3d w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-center text-sm shadow-[0_4px_0_#3730a3] block">
+                                <a href="#/modulo/${slug}" class="btn-3d w-full py-3.5 rounded-2xl bg-indigo-700 hover:bg-indigo-800 text-white font-black text-center text-sm shadow-[0_4px_0_#312e81] block touch-target">
                                     Ver Unidades y Actividades →
                                 </a>
                             </div>
@@ -474,7 +503,7 @@ const App = {
                                                         <span class="font-bold text-xs uppercase tracking-wider ${act.tipo === "foro" ? "text-orange-600" : "text-pink-600"}">${act.tipo}</span>
                                                         <span class="font-extrabold text-sm text-slate-800">${act.titulo}</span>
                                                     </div>
-                                                    ${imgFix ? `<img src="${imgFix}" alt="${act.titulo}" class="rounded-xl border border-slate-200 max-h-48 object-contain my-2">` : ""}
+                                                    ${imgFix ? `<img src="${imgFix}" alt="${act.titulo}" class="rounded-xl border border-slate-200 max-h-48 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: act.titulo, context: `Flujo completación - ${act.titulo}`, desc: "Falta captura de pantalla para ilustrar este paso.", suggested: "Agrega una captura clara mostrando el botón/acción correspondiente." })}
                                                 </div>
                                             `;
                                           })
@@ -504,32 +533,33 @@ const App = {
     }
 
     const cal = data.calendario;
+    const showSem1 = cal.show_sem1 !== false;
+    const showSem2 = cal.show_sem2 !== false;
+    const sem1 = cal["semestre 1"] || cal.semestre_1;
+    const sem2 = cal["semestre 2"] || cal.semestre_2;
 
     app.innerHTML = `
         <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-            <div class="bg-indigo-600 text-white p-8 sm:p-12 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
+            <div class="bg-indigo-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
                 <h1 class="text-3xl sm:text-5xl font-black mb-3">${cal.titulo}</h1>
-                <p class="text-indigo-100 font-semibold text-base max-w-3xl">${this.formatTextWithLinks(cal.descripcion_corta)}</p>
+                <p class="text-indigo-50 font-semibold text-base max-w-3xl">${this.formatTextWithLinks(cal.descripcion_corta || "")}</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 ${showSem1 && showSem2 ? 'md:grid-cols-2' : ''} gap-8">
                 ${
-                  cal["semestre 1"] || cal.semestre_1
+                  showSem1 && sem1
                     ? `
-                    <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-6">
                         <h2 class="text-2xl font-black text-slate-900 border-b-4 border-amber-400 pb-2">
-                            ${(cal["semestre 1"] || cal.semestre_1).nombre}
+                            ${sem1.nombre}
                         </h2>
                         <div class="space-y-4">
-                            ${(
-                              (cal["semestre 1"] || cal.semestre_1).bloques ||
-                              []
-                            )
+                            ${(sem1.bloques || [])
                               .map(
                                 (b) => `
                                     <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between">
                                         <h3 class="font-extrabold text-slate-900 text-sm mb-2">${b.nombre}</h3>
-                                        <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-600">
+                                        <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-700">
                                             <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800">
                                                 Inicio: ${this.formatDate(b.inicio)}
                                             </span>
@@ -548,26 +578,23 @@ const App = {
                 }
 
                 ${
-                  cal["semestre 2"] || cal.semestre_2
+                  showSem2 && sem2
                     ? `
-                    <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-6">
                         <h2 class="text-2xl font-black text-slate-900 border-b-4 border-indigo-400 pb-2">
-                            ${(cal["semestre 2"] || cal.semestre_2).nombre}
+                            ${sem2.nombre}
                         </h2>
                         <div class="space-y-4">
-                            ${(
-                              (cal["semestre 2"] || cal.semestre_2).bloques ||
-                              []
-                            )
+                            ${(sem2.bloques || [])
                               .map(
                                 (b) => `
                                     <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between">
                                         <h3 class="font-extrabold text-slate-900 text-sm mb-2">${b.nombre}</h3>
-                                        <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-600">
-                                            <span class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700">
+                                        <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-700">
+                                            <span class="px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800">
                                                 Inicio: ${this.formatDate(b.inicio)}
                                             </span>
-                                            <span class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700">
+                                            <span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800">
                                                 Cierre: ${this.formatDate(b.cierre)}
                                             </span>
                                         </div>
@@ -580,6 +607,10 @@ const App = {
                     `
                     : ""
                 }
+            </div>
+
+            <div class="text-center">
+                <a href="admin.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-indigo-700">Panel Admin Local</a>
             </div>
         </div>
     `;
@@ -598,11 +629,11 @@ const App = {
 
     app.innerHTML = `
         <div class="animate-pop max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm">
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
                 ← Volver a Guías
             </a>
 
-            <div class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white p-8 sm:p-12 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
+            <div class="bg-gradient-to-br from-indigo-700 to-purple-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
                 <h1 class="text-3xl sm:text-5xl font-black mb-4">${info.titulo}</h1>
                 <p class="text-indigo-100 font-semibold text-lg max-w-2xl">${this.formatTextWithLinks(info.descripcion_corta)}</p>
                 <div class="mt-4 bg-white/10 p-4 rounded-2xl border border-white/20">
@@ -651,38 +682,56 @@ const App = {
     let verMas = data.ver_mas || data.ver_más || "";
     let tarjetaUrl = data.tarjeta_url || enlace || "#/modulos";
 
+    const capa1 = `<p class="text-sm font-extrabold text-slate-900">Toca/Ver: ${titulo}</p>`;
+    const capa2 = `
+        <details class="guia-details group rounded-2xl border-2 border-slate-200 bg-white overflow-hidden">
+            <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-indigo-700 flex items-center justify-between gap-2">
+                <span>Ver explicación con analogía y solución de errores</span>
+                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-4 pb-4 pt-2 space-y-3">
+                <p class="text-sm font-medium text-slate-700 leading-relaxed">${this.formatTextWithLinks(descripcion)}</p>
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                    <strong>Analogía:</strong> Los módulos transversales son como asignaturas complementarias que te ayudan a usar mejor las herramientas para aprender en cualquier curso.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                    <strong>Si hay error:</strong> Lee con calma cada paso, sigue el orden y usa las guías detalladas si no encuentras el botón.
+                </div>
+                ${imagenArriba ? `<img src="${imagenArriba}" alt="${titulo}" class="rounded-2xl border-2 border-slate-200 max-h-64 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: titulo, context: `${titulo} (arriba)`, desc: "Falta imagen/captura ilustrativa para este apartado.", suggested: "Agrega una captura mostrando la ubicación/elemento relevante." })}
+                ${imagenDebajo ? `<img src="${imagenDebajo}" alt="${titulo}" class="rounded-2xl border-2 border-slate-200 max-h-64 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: titulo, context: `${titulo} (debajo)`, desc: "Falta imagen/captura ilustrativa para este apartado.", suggested: "Agrega una captura mostrando el paso o resultado." })}
+            </div>
+        </details>
+    `;
+
     return `
-        <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-5">
-            <div class="flex items-center gap-3">
+        <article class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-4">
+            <header class="flex items-center gap-3">
                 <span class="text-3xl">${icono}</span>
                 <h2 class="text-2xl font-black text-slate-900">${titulo}</h2>
-            </div>
+            </header>
 
-            ${imagenArriba ? `<img src="${imagenArriba}" alt="${titulo}" class="rounded-2xl border-2 border-slate-200 max-h-64 object-contain my-2">` : ""}
-
-            <p class="text-sm font-medium text-slate-700 leading-relaxed">${this.formatTextWithLinks(descripcion)}</p>
-
-            ${imagenDebajo ? `<img src="${imagenDebajo}" alt="${titulo}" class="rounded-2xl border-2 border-slate-200 max-h-64 object-contain my-2">` : ""}
+            ${capa1}
+            ${capa2}
 
             ${
               verMas
                 ? `
                 <div class="pt-3 border-t-2 border-slate-100">
                     <p class="text-sm font-semibold text-slate-600 mb-3">${this.formatTextWithLinks(verMas)}</p>
-                    <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all">
+                    <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all touch-target">
                         <span>Ir a la guía detallada</span>
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </a>
                 </div>
             `
                 : `
-                <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all">
+                <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all touch-target">
                     <span>Ver más</span>
                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
             `
             }
-        </div>
+        </article>
     `;
   },
   // 5. GUÍAS Y TUTORIALES (como_ingresar_a_campus, como_realizar_foro, como_realizar_cuestionario)
@@ -700,45 +749,94 @@ const App = {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Guía: Acceso al Campus -->
-                <a href="#/guias/acceso-campus" class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful">
+                <a href="#/guias/acceso-campus" class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful touch-target">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-3xl">🔑</div>
-                        <h3 class="text-xl font-black text-slate-900">Acceso al Campus Virtual</h3>
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl flex-shrink-0">🔑</div>
+                        <h2 class="text-xl font-black text-slate-900">Acceso al Campus Virtual</h2>
                     </div>
                     <p class="text-sm font-medium text-slate-600">Aprende cómo ingresar al Campus Virtual del INATEC y obtener tus credenciales.</p>
-                    <span class="inline-block mt-4 text-indigo-600 font-extrabold text-sm">Ver guía →</span>
+                    <span class="inline-block mt-4 text-indigo-700 font-extrabold text-sm">Ver guía →</span>
                 </a>
 
                 <!-- Guía: Cómo realizar los Módulos -->
-                <a href="#/guias/como-realizar-modulos" class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful">
+                <a href="#/guias/como-realizar-modulos" class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful touch-target">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-3xl">🎯</div>
-                        <h3 class="text-xl font-black text-slate-900">Cómo realizar los Módulos</h3>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-3xl flex-shrink-0">🎯</div>
+                        <h2 class="text-xl font-black text-slate-900">Cómo realizar los Módulos</h2>
                     </div>
                     <p class="text-sm font-medium text-slate-600">Conoce la estructura general de los módulos transversales y cómo abordarlos.</p>
-                    <span class="inline-block mt-4 text-purple-600 font-extrabold text-sm">Ver guía →</span>
+                    <span class="inline-block mt-4 text-purple-700 font-extrabold text-sm">Ver guía →</span>
                 </a>
 
                 <!-- Guía: Foros -->
-                <a href="#/guias/foros" class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful">
+                <a href="#/guias/foros" class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful touch-target">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-3xl">💬</div>
-                        <h3 class="text-xl font-black text-slate-900">Cómo realizar un Foro</h3>
+                        <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center text-3xl flex-shrink-0">💬</div>
+                        <h2 class="text-xl font-black text-slate-900">Cómo realizar un Foro</h2>
                     </div>
                     <p class="text-sm font-medium text-slate-600">Aprende a participar en los foros de discusión de manera efectiva.</p>
-                    <span class="inline-block mt-4 text-orange-600 font-extrabold text-sm">Ver guía →</span>
+                    <span class="inline-block mt-4 text-orange-700 font-extrabold text-sm">Ver guía →</span>
                 </a>
 
                 <!-- Guía: Cuestionarios -->
-                <a href="#/guias/cuestionarios" class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful">
+                <a href="#/guias/cuestionarios" class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] hover:translate-y-[-4px] transition-all card-playful touch-target">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-3xl">📝</div>
-                        <h3 class="text-xl font-black text-slate-900">Cómo realizar un Cuestionario</h3>
+                        <div class="w-14 h-14 rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-3xl flex-shrink-0">📝</div>
+                        <h2 class="text-xl font-black text-slate-900">Cómo realizar un Cuestionario</h2>
                     </div>
                     <p class="text-sm font-medium text-slate-600">Conoce los diferentes tipos de preguntas y cómo resolver los cuestionarios.</p>
-                    <span class="inline-block mt-4 text-pink-600 font-extrabold text-sm">Ver guía →</span>
+                    <span class="inline-block mt-4 text-pink-700 font-extrabold text-sm">Ver guía →</span>
                 </a>
             </div>
+
+            <!-- Glosario Visual -->
+            <section class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_6px_0_#0f172a] space-y-4">
+                <header class="flex items-center gap-3">
+                    <span class="text-3xl">🧭</span>
+                    <h2 class="text-2xl font-black text-slate-900">Glosario Visual de Iconos del Campus Virtual</h2>
+                </header>
+                <p class="text-sm font-medium text-slate-600">Traducción rápida de iconos que aparecen en el MOOC.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="text-xl">⚙️</span>
+                        <div>
+                            <div class="font-extrabold text-sm text-slate-900">Engranaje</div>
+                            <div class="text-xs text-slate-600">Configuración / Ajustes</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="text-xl">🔔</span>
+                        <div>
+                            <div class="font-extrabold text-sm text-slate-900">Campana</div>
+                            <div class="text-xs text-slate-600">Avisos y Notificaciones</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="text-xl">📎</span>
+                        <div>
+                            <div class="font-extrabold text-sm text-slate-900">Clip</div>
+                            <div class="text-xs text-slate-600">Adjuntar / Subir archivo</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="text-xl">🔍</span>
+                        <div>
+                            <div class="font-extrabold text-sm text-slate-900">Lupa</div>
+                            <div class="text-xs text-slate-600">Buscar</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="text-xl">👤</span>
+                        <div>
+                            <div class="font-extrabold text-sm text-slate-900">Silueta</div>
+                            <div class="text-xs text-slate-600">Tu cuenta / Perfil</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                    <strong>Analogía:</strong> Estos iconos son como señales en la escuela: te indican dónde encontrar cosas importantes.
+                </div>
+            </section>
         </div>
     `;
   },
@@ -756,14 +854,14 @@ const App = {
 
     app.innerHTML = `
         <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm">
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
                 ← Volver a Guías
             </a>
 
-            <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
-                <h2 class="text-2xl font-black text-indigo-600 flex items-center gap-3">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
+                <h1 class="text-2xl sm:text-3xl font-black text-indigo-700 flex items-center gap-3">
                     <span>🔑</span> ${acc.titulo}
-                </h2>
+                </h1>
                 <p class="text-slate-700 font-semibold text-sm">${this.formatTextWithLinks(acc.mensaje)}</p>
 
                 ${(acc.video || []).map((v) => this.renderVideoContainer(v.youtube, v.titulo)).join("")}
@@ -774,32 +872,49 @@ const App = {
                     ${(acc.pasos || [])
                       .map((p) => {
                         const imgFix = this.fixImgPath(p.imagen_debajo);
-                        return `
-                                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-200 space-y-3">
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm">${p.paso}</span>
-                                        <h3 class="font-extrabold text-base text-slate-900">${p.titulo}</h3>
+                        const capa1 = `<p class="text-sm font-extrabold text-slate-900">Toca/Selecciona: ${p.titulo.replace(/Paso\s*\d+[:\-]?\s*/i, '').trim() || p.titulo}</p>`;
+                        const capa2 = `
+                            <details class="guia-details group rounded-2xl border-2 border-slate-200 bg-white overflow-hidden">
+                                <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-indigo-700 flex items-center justify-between gap-2">
+                                    <span>Ver explicación con analogía y solución de errores</span>
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                </summary>
+                                <div class="px-4 pb-4 pt-2 space-y-3">
+                                    <p class="text-sm font-medium text-slate-700 leading-relaxed">${this.formatTextWithLinks(p.explicacion)}</p>
+                                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                                        <strong>Analogía:</strong> Acceder al Campus Virtual es como mostrar tu carnet de estudiante en la puerta para entrar al salón. Solo necesitas tus datos correctos para pasar.
                                     </div>
-                                    <p class="text-sm font-medium text-slate-600 leading-relaxed">${this.formatTextWithLinks(p.explicacion)}</p>
-                                    
-                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-2xl border-2 border-slate-300 max-h-72 object-contain my-3">` : ""}
-
+                                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                                        <strong>Si hay error:</strong> Revisa usuario/contraseña (mayúsculas/minúsculas), conexión y vuelve a intentar. Si persiste, solicita apoyo al Docente TIC.
+                                    </div>
+                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-2xl border-2 border-slate-300 max-h-72 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: p.titulo, context: `Acceso al Campus - Paso ${p.paso}`, desc: "Falta captura de pantalla para ilustrar este paso.", suggested: "Agrega una captura clara mostrando el elemento/botón indicado." })}
+                                </div>
+                            </details>
+                        `;
+                        return `
+                                <article class="bg-slate-50 p-5 sm:p-6 rounded-2xl border-2 border-slate-200 space-y-3">
+                                    <header class="flex items-center gap-3">
+                                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm flex-shrink-0">${p.paso}</span>
+                                        <h2 class="font-extrabold text-base text-slate-900">${p.titulo}</h2>
+                                    </header>
+                                    ${capa1}
+                                    ${capa2}
                                     ${
                                       p.docentes_tic
                                         ? `
                                         <div class="pt-2">
-                                            <h4 class="font-black text-xs text-slate-500 uppercase tracking-wider mb-3">Docentes TIC de Apoyo:</h4>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <h3 class="font-black text-xs text-slate-600 uppercase tracking-wider mb-2">Docentes TIC de Apoyo:</h3>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                                 ${p.docentes_tic
                                                   .map((doc) => {
                                                     const fotoFix =
                                                       this.fixImgPath(doc.foto);
                                                     return `
-                                                        <a href="${doc.contacto}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 transition-all">
-                                                            ${fotoFix ? `<img src="${fotoFix}" class="w-10 h-10 rounded-full object-cover">` : '<span class="text-2xl">👨‍🏫</span>'}
+                                                        <a href="${doc.contacto}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 transition-all touch-target">
+                                                            ${fotoFix ? `<img src="${fotoFix}" alt="${doc.nombre}" class="w-10 h-10 rounded-full object-cover">` : '<span class="text-2xl">👨‍🏫</span>'}
                                                             <div>
                                                                 <span class="block font-black text-sm text-slate-900">${doc.nombre}</span>
-                                                                <span class="text-xs text-emerald-600 font-bold">Contactar por WhatsApp →</span>
+                                                                <span class="text-xs text-emerald-700 font-bold">Contactar por WhatsApp →</span>
                                                             </div>
                                                         </a>
                                                     `;
@@ -810,7 +925,7 @@ const App = {
                                     `
                                         : ""
                                     }
-                                </div>
+                                </article>
                             `;
                       })
                       .join("")}
@@ -833,16 +948,16 @@ const App = {
 
     app.innerHTML = `
         <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm">
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
                 ← Volver a Guías
             </a>
 
-            <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
-                <div class="flex items-center gap-3">
-                    ${this.fixImgPath(fo.imagen_icono) ? `<img src="${this.fixImgPath(fo.imagen_icono)}" class="w-10 h-10">` : '<span class="text-3xl">💬</span>'}
-                    <h2 class="text-2xl font-black text-orange-600">${fo.titulo}</h2>
-                </div>
-                <p class="text-slate-600 font-medium text-sm">${this.formatTextWithLinks(fo.atencion)}</p>
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
+                <header class="flex items-center gap-3">
+                    ${this.fixImgPath(fo.imagen_icono) ? `<img src="${this.fixImgPath(fo.imagen_icono)}" alt="" class="w-10 h-10">` : '<span class="text-3xl">💬</span>'}
+                    <h1 class="text-2xl sm:text-3xl font-black text-orange-700">${fo.titulo}</h1>
+                </header>
+                <p class="text-slate-700 font-semibold text-sm">${this.formatTextWithLinks(fo.atencion)}</p>
 
                 ${(fo.btn_cambiar?.opciones || []).map((o) => this.renderVideoContainer(o.url_embed, o.titulo)).join("")}
 
@@ -850,12 +965,33 @@ const App = {
                     ${(fo.pasos || [])
                       .map((p) => {
                         const imgFix = this.fixImgPath(p.imagen_debajo);
-                        return `
-                                <div class="bg-orange-50/50 p-6 rounded-2xl border-2 border-orange-200 space-y-2">
-                                    <h3 class="font-black text-base text-orange-950">Paso ${p.paso}: ${p.titulo}</h3>
+                        const capa1 = `<p class="text-sm font-extrabold text-slate-900">Toca/Selecciona: ${p.titulo}</p>`;
+                        const capa2 = `
+                            <details class="guia-details group rounded-2xl border-2 border-orange-200 bg-white overflow-hidden">
+                                <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-orange-700 flex items-center justify-between gap-2">
+                                    <span>Ver explicación con analogía y solución de errores</span>
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                </summary>
+                                <div class="px-4 pb-4 pt-2 space-y-3">
                                     <p class="text-sm font-medium text-slate-700">${this.formatTextWithLinks(p.descripcion)}</p>
-                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-xl border border-orange-300 max-h-60 object-contain my-2">` : ""}
+                                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                                        <strong>Analogía:</strong> Participar en un foro es como platicar en grupo en el patio del colegio. Escuchas, das tu opinión con respeto y aprendes de otros.
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                                        <strong>Si hay error:</strong> Verifica que escribiste el mensaje completo, revisa que hayas dado clic en "Enviar" y vuelve a intentar. Si no aparece, revisa conexión.
+                                    </div>
+                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-xl border border-orange-300 max-h-60 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: p.titulo, context: `Foros - Paso ${p.paso}`, desc: "Falta captura para ilustrar este paso del foro.", suggested: "Agrega una captura mostrando la sección/botón indicado." })}
                                 </div>
+                            </details>
+                        `;
+                        return `
+                                <article class="bg-orange-50/50 p-5 sm:p-6 rounded-2xl border-2 border-orange-200 space-y-3">
+                                    <header>
+                                        <h2 class="font-black text-base text-orange-950">Paso ${p.paso}: ${p.titulo}</h2>
+                                    </header>
+                                    ${capa1}
+                                    ${capa2}
+                                </article>
                             `;
                       })
                       .join("")}
@@ -878,16 +1014,16 @@ const App = {
 
     app.innerHTML = `
         <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm">
+            <a href="#/guias" class="inline-flex items-center gap-2 font-black text-indigo-600 hover:underline text-sm touch-target">
                 ← Volver a Guías
             </a>
 
-            <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
-                <div class="flex items-center gap-3">
-                    ${this.fixImgPath(cu.imagen_icono) ? `<img src="${this.fixImgPath(cu.imagen_icono)}" class="w-10 h-10">` : '<span class="text-3xl">📝</span>'}
-                    <h2 class="text-2xl font-black text-pink-600">${cu.titulo}</h2>
-                </div>
-                <p class="text-slate-600 font-medium text-sm">${this.formatTextWithLinks(cu.atencion)}</p>
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] space-y-6">
+                <header class="flex items-center gap-3">
+                    ${this.fixImgPath(cu.imagen_icono) ? `<img src="${this.fixImgPath(cu.imagen_icono)}" alt="" class="w-10 h-10">` : '<span class="text-3xl">📝</span>'}
+                    <h1 class="text-2xl sm:text-3xl font-black text-pink-700">${cu.titulo}</h1>
+                </header>
+                <p class="text-slate-700 font-semibold text-sm">${this.formatTextWithLinks(cu.atencion)}</p>
 
                 ${(cu.btn_cambiar?.opciones || []).map((o) => this.renderVideoContainer(o.url_embed, o.titulo)).join("")}
 
@@ -895,18 +1031,19 @@ const App = {
                     ${(cu.pasos || [])
                       .map((p) => {
                         const imgFix = this.fixImgPath(p.imagen_debajo);
+                        const capa1 = `<p class="text-sm font-extrabold text-slate-900">Toca/Selecciona: ${p.titulo}</p>`;
                         // Si tiene tipos_cuestionarios, renderizamos una sub-sección
                         const tiposHTML = p.tipos_cuestionarios
                           ? `
                                 <div class="mt-4 space-y-4">
-                                    <h4 class="font-black text-pink-700 text-sm uppercase tracking-wider">Tipos de preguntas:</h4>
+                                    <h3 class="font-black text-pink-700 text-sm uppercase tracking-wider">Tipos de preguntas:</h3>
                                     ${p.tipos_cuestionarios
                                       .map(
                                         (t) => `
                                         <div class="bg-white p-4 rounded-xl border-2 border-pink-100 space-y-2">
-                                            <h5 class="font-black text-sm text-pink-800">${t.tipo}</h5>
+                                            <h4 class="font-black text-sm text-pink-800">${t.tipo}</h4>
                                             <p class="text-xs text-slate-600 leading-relaxed">${this.formatTextWithLinks(t.descripcion)}</p>
-                                            ${t.imagen_tipo ? `<img src="${this.fixImgPath(t.imagen_tipo)}" alt="${t.tipo}" class="rounded-lg border border-pink-200 max-h-48 object-contain my-1">` : ""}
+                                            ${t.imagen_tipo ? `<img src="${this.fixImgPath(t.imagen_tipo)}" alt="${t.tipo}" class="rounded-lg border border-pink-200 max-h-48 object-contain my-1">` : this.renderMediaPlaceholder({ type: "captura", title: t.tipo, context: `Cuestionario - Tipo de pregunta`, desc: "Falta captura para mostrar este tipo de pregunta.", suggested: "Agrega una captura del ejemplo de este tipo de pregunta." })}
                                         </div>
                                     `,
                                       )
@@ -915,13 +1052,34 @@ const App = {
                             `
                           : "";
 
-                        return `
-                                <div class="bg-pink-50/50 p-6 rounded-2xl border-2 border-pink-200 space-y-2">
-                                    <h3 class="font-black text-base text-pink-950">Paso ${p.paso}: ${p.titulo}</h3>
+                        const capa2 = `
+                            <details class="guia-details group rounded-2xl border-2 border-pink-200 bg-white overflow-hidden">
+                                <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-pink-700 flex items-center justify-between gap-2">
+                                    <span>Ver explicación con analogía y solución de errores</span>
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                </summary>
+                                <div class="px-4 pb-4 pt-2 space-y-3">
                                     <p class="text-sm font-medium text-slate-700">${this.formatTextWithLinks(p.descripcion)}</p>
-                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-xl border border-pink-300 max-h-60 object-contain my-2">` : ""}
+                                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                                        <strong>Analogía:</strong> Responder un cuestionario es como repasar lo aprendido antes del examen. Lee con calma, piensa y marca solo la respuesta que corresponde.
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                                        <strong>Si hay error:</strong> Verifica la pregunta, lee las opciones completas y no te apresures. Si se cierra o falla, revisa conexión e inténtalo de nuevo.
+                                    </div>
+                                    ${imgFix ? `<img src="${imgFix}" alt="${p.titulo}" class="rounded-xl border border-pink-300 max-h-60 object-contain my-2">` : this.renderMediaPlaceholder({ type: "captura", title: p.titulo, context: `Cuestionarios - Paso ${p.paso}`, desc: "Falta captura para ilustrar este paso.", suggested: "Agrega una captura mostrando el elemento indicado." })}
                                     ${tiposHTML}
                                 </div>
+                            </details>
+                        `;
+
+                        return `
+                                <article class="bg-pink-50/50 p-5 sm:p-6 rounded-2xl border-2 border-pink-200 space-y-3">
+                                    <header>
+                                        <h2 class="font-black text-base text-pink-950">Paso ${p.paso}: ${p.titulo}</h2>
+                                    </header>
+                                    ${capa1}
+                                    ${capa2}
+                                </article>
                             `;
                       })
                       .join("")}
@@ -1012,7 +1170,7 @@ const App = {
                       .map(
                         (turno) => `
                         <button onclick="window._buscadorSeleccionarTurno('${turno}')" 
-                                class="p-6 rounded-2xl bg-slate-50 border-3 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all font-extrabold text-slate-800 text-center">
+                                class="p-6 rounded-2xl bg-slate-50 border-3 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all font-extrabold text-slate-800 text-center touch-target">
                             <span class="text-2xl block mb-2">🕐</span>
                             ${turno.charAt(0).toUpperCase() + turno.slice(1)}
                         </button>
@@ -1049,12 +1207,12 @@ const App = {
                       .map(
                         (op) => `
                         <button onclick="window._buscadorSeleccionarCarrera('${op.carrera}', '${op.grupo}')" 
-                                class="w-full p-4 rounded-2xl bg-slate-50 border-3 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all font-extrabold text-slate-800 text-left flex justify-between items-center">
+                                class="w-full p-4 rounded-2xl bg-slate-50 border-3 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all font-extrabold text-slate-800 text-left flex justify-between items-center touch-target">
                             <div>
                                 <span class="block text-sm font-bold text-slate-900">${op.carrera.toUpperCase()}</span>
                                 <span class="text-xs text-slate-500">Grupo: ${op.grupo}</span>
                             </div>
-                            <span class="text-emerald-500">→</span>
+                            <span class="text-emerald-600">→</span>
                         </button>
                     `,
                       )
@@ -1088,9 +1246,9 @@ const App = {
                             .map(
                               (e) => `
                         <button onclick="window._buscadorSeleccionarEstudiante('${e.nombres}', '${e.apellidos}', '${e.usuario}', '${e.contrasena}')" 
-                                class="w-full p-4 border-b border-slate-200 hover:bg-emerald-50 transition-all flex justify-between items-center text-left">
+                                class="w-full p-4 border-b border-slate-200 hover:bg-emerald-50 transition-all flex justify-between items-center text-left touch-target">
                             <span class="font-medium text-slate-800">${e.nombres} ${e.apellidos}</span>
-                            <span class="text-emerald-600 font-bold text-sm">${info.pantallas[2]?.btn_ver || "Ver"} →</span>
+                            <span class="text-emerald-700 font-bold text-sm">${info.pantallas[2]?.btn_ver || "Ver"} →</span>
                         </button>
                     `,
                             )
@@ -1151,7 +1309,7 @@ const App = {
 
                 <div class="pt-4">
                     <button onclick="window._buscadorReiniciar()" 
-                            class="btn-3d px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-base rounded-2xl shadow-[0_6px_0_#047857]">
+                            class="btn-3d px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base rounded-2xl shadow-[0_6px_0_#065f46] touch-target">
                         ${info.pantallas[3]?.btn_ok || "Entendido"}
                     </button>
                 </div>
@@ -1212,10 +1370,10 @@ const App = {
 
     app.innerHTML = `
         <div class="animate-pop max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <div class="bg-emerald-600 text-white p-8 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] text-center space-y-3">
+            <div class="bg-emerald-700 text-white p-6 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a] text-center space-y-3">
                 <span class="text-4xl">🔑</span>
                 <h1 class="text-3xl sm:text-5xl font-black">${info.titulo}</h1>
-                <p class="text-emerald-100 font-medium text-base max-w-xl mx-auto">${this.formatTextWithLinks(info.descripcion_corta)}</p>
+                <p class="text-emerald-50 font-semibold text-base max-w-xl mx-auto">${this.formatTextWithLinks(info.descripcion_corta)}</p>
             </div>
 
             <div class="bg-white p-8 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
@@ -1229,7 +1387,7 @@ const App = {
                       estado.paso > 1
                         ? `
                         <button onclick="window._buscadorVolver()" 
-                                class="text-sm font-bold text-slate-500 hover:text-emerald-600 transition-colors flex items-center gap-1">
+                                class="text-sm font-bold text-slate-600 hover:text-emerald-700 transition-colors flex items-center gap-1 touch-target">
                             ← Volver
                         </button>
                     `
