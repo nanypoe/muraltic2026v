@@ -4,7 +4,16 @@ const STATIC_ASSETS = [
   './index.html',
   './manifest.json',
   './assets/css/styles.css',
-  './assets/js/app.js'
+  './assets/js/app.js',
+  './assets/data/generalidades.json',
+  './assets/data/para_que_sirven.json',
+  './assets/data/modulos_actividades.json',
+  './assets/data/calendario.json',
+  './assets/data/como_ingresar_a_campus.json',
+  './assets/data/como_realizar_modulo.json',
+  './assets/data/como_realizar_foro.json',
+  './assets/data/como_realizar_cuestionario.json',
+  './assets/data/credenciales.json'
 ];
 
 self.addEventListener('install', (event) => {

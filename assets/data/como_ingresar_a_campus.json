@@ -21,7 +21,7 @@
                 "pc":"Ver para PC"
             }
         },
-        "mensaje_sin_datos": "En caso de que no tengas conexiónn, podés continuar con el tutorial siguiendo los siguientes pasos: ",
+        "mensaje_sin_datos": "En caso de que no tengas conexión, podés continuar con el tutorial siguiendo los siguientes pasos: ",
         "pasos": [
             {
                 "paso": 1,

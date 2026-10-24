@@ -1,6 +1,45 @@
 const App = {
   cache: {},
 
+  // Mapa local de iconos (elimina dependencia de fuentes externas)
+  iconMap: {
+    account_balance: "🏛️",
+    agriculture: "🌱",
+    analytics: "📊",
+    code: "💻",
+    communication: "💬",
+    group: "👥",
+    groups: "👥",
+    more: "✨",
+    palette: "🎨",
+    pets: "🐾",
+    psychology: "🧠",
+    social_leaderboard: "📈",
+    auto_stories: "📖",
+    badge: "🪪",
+    diversity_3: "🌍",
+    eco: "🌿",
+    flag: "🚩",
+    gavel: "⚖️",
+    handshake: "🤝",
+    history_edu: "📜",
+    menu_book: "📚",
+    military_tech: "🎖️",
+    museum: "🏛️",
+    potted_plant: "🪴",
+    record_voice_over: "🗣️",
+    theater_comedy: "🎭",
+    verified: "✅",
+    warning: "⚠️",
+    work: "💼",
+    star: "⭐",
+    book: "📘",
+  },
+
+  icon(name, fallback = "⭐") {
+    return this.iconMap[name] || fallback;
+  },
+
   async fetchJSON(filename) {
     // Soporta buscar en la raíz o en assets/data/ por compatibilidad
     const possiblePaths = [
@@ -55,26 +94,43 @@ const App = {
       : url;
   },
 
-  // Componente reutilizable para videos de YouTube o tarjetas de fallback
-  renderVideoContainer(url, title = "Video Explicativo") {
-    const embedUrl = this.getYouTubeEmbedURL(url);
+  // Componente reutilizable para videos (YouTube embebido o MP4 local) o placeholder
+  renderVideoContainer(input, title = "Video Explicativo") {
+    // Acepta string (URL) o el objeto del JSON { youtube, descarga, titulo }
+    const video = typeof input === "object" && input !== null ? input : { youtube: input };
+    const titulo = video.titulo || title;
+    const embedUrl = this.getYouTubeEmbedURL(video.youtube);
+
     if (embedUrl) {
       return `
                 <div class="my-6 bg-slate-900 p-3 rounded-3xl border-4 border-slate-900 shadow-xl">
                     <div class="video-responsive-wrapper">
-                        <iframe src="${embedUrl}" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="${embedUrl}" title="${titulo}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
+                    ${video.descarga ? `<a href="${this.fixImgPath(video.descarga)}" download class="inline-flex items-center gap-2 mt-3 text-xs font-bold text-indigo-200 hover:text-white">⬇️ Descargar versión ligera (MP4)</a>` : ""}
                 </div>
             `;
-    } else {
-      return this.renderMediaPlaceholder({
-        type: "video",
-        title: title,
-        context: title,
-        desc: "No se ha proporcionado una URL embebible de video para este apartado.",
-        suggested: "Sube el video a YouTube (o plataforma embebible) y pega la URL aquí para que se muestre automáticamente.",
-      });
     }
+
+    if (video.descarga) {
+      return `
+                <div class="my-6 bg-slate-900 p-3 rounded-3xl border-4 border-slate-900 shadow-xl">
+                    <video controls preload="none" playsinline class="w-full rounded-2xl" title="${titulo}">
+                        <source src="${this.fixImgPath(video.descarga)}" type="video/mp4" />
+                        Tu navegador no puede reproducir este video.
+                    </video>
+                    <a href="${this.fixImgPath(video.descarga)}" download class="inline-flex items-center gap-2 mt-3 text-xs font-bold text-indigo-200 hover:text-white">⬇️ Descargar video</a>
+                </div>
+            `;
+    }
+
+    return this.renderMediaPlaceholder({
+      type: "video",
+      title: titulo,
+      context: titulo,
+      desc: "No se ha proporcionado una URL embebible ni un archivo MP4 local para este video.",
+      suggested: "Sube el video a YouTube (o plataforma embebible) y pega la URL en el campo 'youtube', o agrega el MP4 en la ruta indicada.",
+    });
   },
 
   // Placeholder para recursos multimedia faltantes (sin inventar contenido)
@@ -125,16 +181,40 @@ const App = {
     const menu = document.getElementById("mobile-menu");
     if (!btn || !menu) return;
 
+    const setOpen = (open) => {
+      menu.classList.toggle("hidden", !open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    };
+
     btn.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
+      setOpen(menu.classList.contains("hidden"));
     });
 
     // Ocultar menú móvil al hacer clic en un enlace
     document.querySelectorAll(".mobile-nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        menu.classList.add("hidden");
-      });
+      link.addEventListener("click", () => setOpen(false));
     });
+
+    // Cerrar con Escape y al navegar
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+    window.addEventListener("hashchange", () => setOpen(false));
+  },
+
+  // Anuncia la ruta actual a lectores de pantalla y ajusta el foco
+  announceRoute() {
+    const live = document.getElementById("route-announcer");
+    const app = document.getElementById("app");
+    const heading = app?.querySelector("h1");
+    if (live) {
+      live.textContent = heading?.textContent?.trim() || "Contenido actualizado";
+    }
+    if (app) app.focus({ preventScroll: true });
   },
 
   // Helper: Formatear fechas de "AAAA-MM-DD" a "22 de agosto de 2026"
@@ -180,6 +260,89 @@ const App = {
     return `${weekdays[date.getDay()]} ${day} de ${months[month]} de ${year}`;
   },
 
+  // ===== Progreso persistente por guía (localStorage) =====
+  progressKey() {
+    return "muraltic-progress:" + (window.location.hash || "#/");
+  },
+
+  getProgress() {
+    try {
+      const raw = localStorage.getItem(this.progressKey());
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr.map(String) : [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  setStep(step, done) {
+    try {
+      const set = new Set(this.getProgress());
+      if (done) set.add(String(step));
+      else set.delete(String(step));
+      localStorage.setItem(this.progressKey(), JSON.stringify([...set]));
+    } catch (e) {}
+  },
+
+  resetProgress() {
+    try {
+      localStorage.removeItem(this.progressKey());
+    } catch (e) {}
+    this.route();
+  },
+
+  stepToggleHTML(step) {
+    const done = this.getProgress().includes(String(step));
+    return `
+      <button type="button" data-progress-step="${step}" data-done="${done}"
+        onclick="App.toggleStep(this)"
+        class="mt-2 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all touch-target ${done ? "bg-emerald-600 text-white" : "bg-slate-200 text-slate-800 hover:bg-slate-300"}">
+        <span>${done ? "✓" : "○"}</span>
+        <span class="step-label">${done ? "Hecho" : "Marcar como hecho"}</span>
+      </button>
+    `;
+  },
+
+  toggleStep(el) {
+    const step = el.getAttribute("data-progress-step");
+    const done = el.getAttribute("data-done") !== "true";
+    this.setStep(step, done);
+    el.setAttribute("data-done", String(done));
+    el.classList.toggle("bg-emerald-600", done);
+    el.classList.toggle("text-white", done);
+    el.classList.toggle("bg-slate-200", !done);
+    el.classList.toggle("hover:bg-slate-300", !done);
+    el.querySelector("span").textContent = done ? "✓" : "○";
+    const label = el.querySelector(".step-label");
+    if (label) label.textContent = done ? "Hecho" : "Marcar como hecho";
+    this.updateProgressUI();
+  },
+
+  updateProgressUI() {
+    const buttons = Array.from(document.querySelectorAll("[data-progress-step]"));
+    const total = buttons.length;
+    const done = buttons.filter((b) => b.getAttribute("data-done") === "true").length;
+    const countEl = document.querySelector("[data-progress-count]");
+    const barEl = document.querySelector("[data-progress-bar]");
+    if (countEl) countEl.textContent = `${done} de ${total}`;
+    if (barEl) barEl.style.width = total ? `${Math.round((done / total) * 100)}%` : "0%";
+  },
+
+  progressPanel(total) {
+    const done = Math.min(this.getProgress().length, total);
+    return `
+      <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 space-y-2" aria-live="polite">
+        <div class="flex items-center justify-between gap-3">
+          <p class="text-sm font-extrabold text-slate-900">Has aprendido <span data-progress-count>${done} de ${total}</span> pasos</p>
+          <button type="button" onclick="App.resetProgress()" class="text-xs font-bold text-slate-600 hover:text-indigo-700 touch-target">Reiniciar</button>
+        </div>
+        <div class="w-full h-3 rounded-full bg-slate-200 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}">
+          <div data-progress-bar class="h-full bg-emerald-500 transition-all duration-300" style="width:${total ? Math.round((done / total) * 100) : 0}%"></div>
+        </div>
+      </div>
+    `;
+  },
+
   // Manejador de rutas SPA
   async route() {
     const app = document.getElementById("app");
@@ -222,6 +385,7 @@ const App = {
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+    this.announceRoute();
   },
 
   // 1. LANDING PAGE PRINCIPAL (generalidades.json)
@@ -282,7 +446,7 @@ const App = {
                             <div class="bg-white p-6 rounded-3xl border-4 border-slate-200 card-playful flex flex-col justify-between">
                                 <div>
                                     <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
-                                        <span class="material-symbols-outlined text-3xl">${b.icono || "star"}</span>
+                                        <span class="text-3xl">${this.icon(b.icono, "⭐")}</span>
                                     </div>
                                     <h3 class="text-xl font-black text-slate-900 mb-2">${b.titulo}</h3>
                                     <p class="text-sm text-slate-600 font-medium leading-relaxed">${this.formatTextWithLinks(b.descripcion)}</p>
@@ -412,7 +576,7 @@ const App = {
                                 <div>
                                     <div class="flex items-center justify-between mb-4">
                                         <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-3xl">${m.icono || "menu_book"}</span>
+                                            <span class="text-3xl">${this.icon(m.icono, "📚")}</span>
                                         </div>
                                         <span class="px-3 py-1 rounded-xl bg-indigo-50 text-indigo-700 font-black text-xs">
                                             ${m.unidades_a_completar || m.detalle_unidades?.length || 0} Unidades
@@ -462,7 +626,7 @@ const App = {
 
                 <div class="bg-indigo-900 text-white p-8 sm:p-10 rounded-3xl border-4 border-slate-900 shadow-[0_8px_0_#0f172a]">
                     <div class="flex items-center gap-4 mb-4">
-                        <span class="material-symbols-outlined text-4xl text-yellow-400">${modulo.icono || "book"}</span>
+                        <span class="text-4xl text-yellow-400">${this.icon(modulo.icono, "📘")}</span>
                         <h1 class="text-3xl sm:text-4xl font-black">${modulo.nombre}</h1>
                     </div>
                     <p class="text-indigo-200 font-semibold text-base leading-relaxed">${this.formatTextWithLinks(modulo.descripcion)}</p>
@@ -687,7 +851,7 @@ const App = {
         <details class="guia-details group rounded-2xl border-2 border-slate-200 bg-white overflow-hidden">
             <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-indigo-700 flex items-center justify-between gap-2">
                 <span>Ver explicación con analogía y solución de errores</span>
-                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                <span class="text-lg transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
             </summary>
             <div class="px-4 pb-4 pt-2 space-y-3">
                 <p class="text-sm font-medium text-slate-700 leading-relaxed">${this.formatTextWithLinks(descripcion)}</p>
@@ -720,14 +884,14 @@ const App = {
                     <p class="text-sm font-semibold text-slate-600 mb-3">${this.formatTextWithLinks(verMas)}</p>
                     <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all touch-target">
                         <span>Ir a la guía detallada</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        <span aria-hidden="true">→</span>
                     </a>
                 </div>
             `
                 : `
                 <a href="${tarjetaUrl}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-[0_4px_0_#3730a3] btn-3d transition-all touch-target">
                     <span>Ver más</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    <span aria-hidden="true">→</span>
                 </a>
             `
             }
@@ -864,9 +1028,11 @@ const App = {
                 </h1>
                 <p class="text-slate-700 font-semibold text-sm">${this.formatTextWithLinks(acc.mensaje)}</p>
 
-                ${(acc.video || []).map((v) => this.renderVideoContainer(v.youtube, v.titulo)).join("")}
+                ${(acc.video || []).map((v) => this.renderVideoContainer(v, v.titulo)).join("")}
 
                 <p class="text-slate-600 font-bold text-xs uppercase tracking-wider">${this.formatTextWithLinks(acc.mensaje_sin_datos)}</p>
+
+                ${this.progressPanel((acc.pasos || []).length)}
 
                 <div class="space-y-6">
                     ${(acc.pasos || [])
@@ -877,7 +1043,7 @@ const App = {
                             <details class="guia-details group rounded-2xl border-2 border-slate-200 bg-white overflow-hidden">
                                 <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-indigo-700 flex items-center justify-between gap-2">
                                     <span>Ver explicación con analogía y solución de errores</span>
-                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                    <span class="text-lg transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
                                 </summary>
                                 <div class="px-4 pb-4 pt-2 space-y-3">
                                     <p class="text-sm font-medium text-slate-700 leading-relaxed">${this.formatTextWithLinks(p.explicacion)}</p>
@@ -899,6 +1065,7 @@ const App = {
                                     </header>
                                     ${capa1}
                                     ${capa2}
+                                    ${this.stepToggleHTML(p.paso)}
                                     ${
                                       p.docentes_tic
                                         ? `
@@ -961,6 +1128,8 @@ const App = {
 
                 ${(fo.btn_cambiar?.opciones || []).map((o) => this.renderVideoContainer(o.url_embed, o.titulo)).join("")}
 
+                ${this.progressPanel((fo.pasos || []).length)}
+
                 <div class="space-y-4">
                     ${(fo.pasos || [])
                       .map((p) => {
@@ -970,7 +1139,7 @@ const App = {
                             <details class="guia-details group rounded-2xl border-2 border-orange-200 bg-white overflow-hidden">
                                 <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-orange-700 flex items-center justify-between gap-2">
                                     <span>Ver explicación con analogía y solución de errores</span>
-                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                    <span class="text-lg transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
                                 </summary>
                                 <div class="px-4 pb-4 pt-2 space-y-3">
                                     <p class="text-sm font-medium text-slate-700">${this.formatTextWithLinks(p.descripcion)}</p>
@@ -991,6 +1160,7 @@ const App = {
                                     </header>
                                     ${capa1}
                                     ${capa2}
+                                    ${this.stepToggleHTML(p.paso)}
                                 </article>
                             `;
                       })
@@ -1027,6 +1197,8 @@ const App = {
 
                 ${(cu.btn_cambiar?.opciones || []).map((o) => this.renderVideoContainer(o.url_embed, o.titulo)).join("")}
 
+                ${this.progressPanel((cu.pasos || []).length)}
+
                 <div class="space-y-4">
                     ${(cu.pasos || [])
                       .map((p) => {
@@ -1056,7 +1228,7 @@ const App = {
                             <details class="guia-details group rounded-2xl border-2 border-pink-200 bg-white overflow-hidden">
                                 <summary class="cursor-pointer px-4 py-3 font-extrabold text-sm text-pink-700 flex items-center justify-between gap-2">
                                     <span>Ver explicación con analogía y solución de errores</span>
-                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                    <span class="text-lg transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
                                 </summary>
                                 <div class="px-4 pb-4 pt-2 space-y-3">
                                     <p class="text-sm font-medium text-slate-700">${this.formatTextWithLinks(p.descripcion)}</p>
@@ -1079,6 +1251,7 @@ const App = {
                                     </header>
                                     ${capa1}
                                     ${capa2}
+                                    ${this.stepToggleHTML(p.paso)}
                                 </article>
                             `;
                       })
