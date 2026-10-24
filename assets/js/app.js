@@ -60,7 +60,6 @@ const App = {
         // Sigue intentando en la siguiente ruta
       }
     }
-    console.warn(`No se pudo cargar el archivo: ${filename}`);
     return null;
   },
 
@@ -251,7 +250,6 @@ const App = {
     }).join("");
   },
 
-  // Helper: Formatear fechas de "AAAA-MM-DD" a "22 de agosto de 2026"
   // Helper: Formatear fechas de "AAAA-MM-DD" a "jueves 22 de agosto de 2026"
   formatDate(dateStr) {
     if (!dateStr || typeof dateStr !== "string") return dateStr;
